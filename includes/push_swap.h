@@ -28,8 +28,9 @@ typedef struct s_node
 typedef struct s_stack
 {
 	t_node	*top;
+	t_node	*bot;
 	int		size;
-	char	*name;
+	char	name;
 }	t_stack;
 
 typedef struct s_push_swap
