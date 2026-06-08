@@ -16,21 +16,41 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+#include "../libft/libft.h"
 
 typedef struct s_node
 {
-	int value;
-	int index;
-	struct s_node *next;
-	struct s_node *prev;
-} t_node;
+	int				value;
+	int				index;
+	struct s_node	*next;
+}	t_node;
 
 typedef struct s_stack
 {
-	t_node *top;
-	int size;
-	char *name;
+	t_node	*top;
+	int		size;
+	char	*name;
 }	t_stack;
 
+typedef struct s_push_swap
+{
+	t_stack	a;
+	t_stack	b;
+	int		total_ops;
+	double	disorder;
+	char	*strat_name;
+	char	*strat_complex;
+	int		n_sa;
+	int		n_sb;
+	int		n_ss;
+	int		n_pa;
+	int		n_pb;
+	int		n_ra;
+	int		n_rb;
+	int		n_rr;
+	int		n_rra;
+	int		n_rrb;
+	int		n_rrr;
+} t_push_swap;
 
 #endif
