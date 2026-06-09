@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-#include "../stack/stack.h"
-#include "operations.h"
+#include "../../includes/operations.h"
 
 void	push(t_stack *src, t_stack *dst)
 {

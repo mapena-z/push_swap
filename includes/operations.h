@@ -1,7 +1,7 @@
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
-#include "../../includes/push_swap.h"
+#include "push_swap.h"
 
 void print_mov(t_stack *stack, char mov);
 /* Stack operations */
