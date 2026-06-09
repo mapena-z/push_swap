@@ -27,13 +27,13 @@ void	push(t_stack *src, t_stack *dst)
 		src->bot = NULL;
 }
 
-void	pa(t_stack *src, t_stack *dst)
+void	pa(t_stack *a, t_stack *b)
 {
-	push(dst, src);
-	print_mov(src, 'p');
+	push(b, a);
+	print_mov(a, 'p');
 }
-void	pb(t_stack *src, t_stack *dst)
+void	pb(t_stack *a, t_stack *b)
 {
-	push(dst, src);
-	print_mov(src, 'p');
+	push(a, b);
+	print_mov(b, 'p');
 }
