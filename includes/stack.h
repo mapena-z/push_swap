@@ -1,7 +1,7 @@
 #ifndef STACK_H
 # define STACK_H
 
-#include "../../includes/push_swap.h"
+#include "push_swap.h"
 
 /* Node creation and destruction */
 t_node	*node_new(int value, int index);

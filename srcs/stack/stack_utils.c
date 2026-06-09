@@ -1,5 +1,4 @@
 #include "../../includes/push_swap.h"
-#include "stack.h"
 
 t_stack	*stack_new(char name)
 {
