@@ -22,8 +22,4 @@ int		stack_min_pos(t_stack *stack);
 int		stack_max_pos(t_stack *stack);
 int		stack_find_index(t_stack *stack, int index);
 
-/* Debug */
-void	stack_print(t_stack *stack);
-void	stack_print_both(t_stack *a, t_stack *b);
-
 #endif
