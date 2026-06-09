@@ -1,6 +1,7 @@
 #include "../../../includes/push_swap.h"
 #include "../../../includes/stack_utils.h"
 
+/* Funciona pero no es lo mas óptimo en movimientos*/
 void ra_next_big(t_stack *stack_a, int n)
 {
 	int i;
@@ -25,7 +26,7 @@ void rra_next_big(t_stack *stack_a, int n)
 	}
 }
 
-void insertion_sort(t_stack *stack_a, t_stack *stack_b)
+void insertion_basic(t_stack *stack_a, t_stack *stack_b)
 {
 	int pos;
 
