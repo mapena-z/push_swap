@@ -1,4 +1,5 @@
 #include "../../../includes/push_swap.h"
+#include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
 
 /* Funciona pero no es lo mas óptimo en movimientos*/

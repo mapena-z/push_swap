@@ -1,24 +1,68 @@
 #include "../../../includes/push_swap.h"
+#include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
 
-void sort_b(t_stack stack_b)
+static void	rotate_up_b(t_stack *stack_b, int n)
 {
-		
+	while (n-- > 0)
+		rb(stack_b);
 }
 
-void insertion_basic(t_stack *stack_a, t_stack *stack_b)
+static void	rotate_down_b(t_stack *stack_b, int n)
 {
-	int pos;
+	while (n-- > 0)
+		rrb(stack_b);
+}
+
+static int	find_insertion_pos(t_stack *stack_b, int index)
+{
+	t_node	*node;
+	int		pos;
+	int		min_pos;
+	int		max_pos;
+
+	if (!stack_b || stack_b->size == 0)
+		return (0);
+	if (stack_b->size == 1)
+		return (0);
+	min_pos = stack_min_pos(stack_b);
+	max_pos = stack_max_pos(stack_b);
+	if (index > stack_get_at(stack_b, max_pos)->index)
+		return (max_pos);
+	if (index < stack_get_at(stack_b, min_pos)->index)
+		return ((min_pos + 1) % stack_b->size);
+	node = stack_b->top;
+	pos = 0;
+	while (node && node->next)
+	{
+		if (node->index > index && node->next->index < index)
+			return (pos + 1);
+		node = node->next;
+		pos++;
+	}
+	return (0);
+}
+
+static void	prepare_b(t_stack *stack_b, int pos)
+{
+	if (!stack_b || stack_b->size == 0)
+		return ;
+	if (pos <= stack_b->size / 2)
+		rotate_up_b(stack_b, pos);
+	else
+		rotate_down_b(stack_b, stack_b->size - pos);
+}
+
+void	insertion_sort(t_stack *stack_a, t_stack *stack_b)
+{
+	int	pos;
 
 	if (!stack_a || !stack_b)
 		return ;
 	while (stack_a->size > 0)
 	{
-		pos = stack_min_pos(stack_a);
-		if (pos <= stack_a->size / 2)
-			ra_next_big(stack_a, pos);
-		else
-			rra_next_big(stack_a, stack_a->size - pos);
+		pos = find_insertion_pos(stack_b, stack_a->top->index);
+		prepare_b(stack_b, pos);
 		pb(stack_a, stack_b);
 	}
 	while (stack_b->size > 0)

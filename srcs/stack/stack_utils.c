@@ -34,7 +34,7 @@ void	stack_clear(t_stack *stack)
 void	stack_free(t_stack *stack)
 {
 	if (!stack)
-		return (NULL);
+		return ;
 	stack_clear(stack);
 	free(stack);
 }

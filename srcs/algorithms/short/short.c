@@ -1,5 +1,6 @@
 #include "../../../includes/push_swap.h"
 #include "../../../includes/operations.h"
+#include "../../../includes/stack_utils.h"
 
 void alg_two(t_stack *stack)
 {
