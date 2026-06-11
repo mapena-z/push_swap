@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-
+/*
 void	free_stacks(t_stack *stack)
 {
 	t_stack	*tmp;
@@ -58,3 +58,4 @@ void	push(t_stack *stack, int value)
 		current = current->bot->value;
 	current->bot->next = new_node;
 }
+*/

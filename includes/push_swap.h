@@ -54,14 +54,4 @@ typedef struct s_push_swap
 	int		n_rrr;
 } t_push_swap;
 
-int		is_number(const char *str);
-int		check_long(long value);
-long	ft_atol(const char *nptr);
-int		check_flags(char *arg);
-int		check_split(char *argv, t_stack *stack);
-int		parse_arguments(int argc, char **argv, int i, t_stack *stack);
-void	free_stacks(t_stack *stack);
-void	free_words(char **words);
-void	push(t_stack *stack, int value);
-
 #endif

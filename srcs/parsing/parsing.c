@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/push_swap.h"
+#include "../../includes/parsing.h"
+
 
 int	check_flags(char *arg)
 {
@@ -43,7 +44,7 @@ int	check_split(char *argv, t_stack *stack)
 			value = ft_atol(numbers[i]);
 			if (!check_long(value) || !is_number(numbers[i]))
 				return (1);
-			push(stack, value);
+			ft_push(stack, value);
 			i++;
 		}
 	}
