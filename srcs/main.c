@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/10 12:07:41 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:20:18 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	}
 	if (i == argc)
 		return (0);
-	if (parse_arguments(argc, argv, i) == 1)
+	if (parse_arguments(argc, argv, i, stack_a) == 1)
 		return (1);
 	ft_printf ("historia\n");
 	return (0);

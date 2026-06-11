@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/10 12:06:42 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:38:05 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,35 @@ int	check_flags(char *arg)
 	return (0);
 }
 
-int	check_split(char *argv)
+int	check_split(char *argv, t_stack *stack)
 {
-	char	**words;
+	char	**numbers;
 	int		i;
 	long	value;
 
 	if (!argv || *argv == '\0' || (argv[0] == ' ' && ft_strlen(argv) == 1))
 		return (1);
-	words = ft_split(argv, ' ');
+	numbers = ft_split(argv, ' ');
 	i = 0;
-	if (words != NULL)
+	if (numbers != NULL)
 	{
-		while (words[i] != NULL)
+		while (numbers[i] != NULL)
 		{
-			value = ft_atol(words[i]);
-			if (!check_long(value) || !is_number(words[i]))
+			value = ft_atol(numbers[i]);
+			if (!check_long(value) || !is_number(numbers[i]))
 				return (1);
+			push(stack, value);
 			i++;
 		}
 	}
 	return (0);
 }
 
-int	parse_arguments(int argc, char **argv, int i)
+int	parse_arguments(int argc, char **argv, int i, t_stack *stack)
 {
 	while (i < argc)
 	{
-		if (check_split(argv[i]))
+		if (check_split(argv[i], stack))
 		{
 			write(2, "Error\n", 6);
 			return (1);

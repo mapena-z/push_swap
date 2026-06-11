@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 19:42:03 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/10 12:06:54 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/11 10:37:33 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int		is_number(const char *str);
 int		check_long(long value);
 long	ft_atol(const char *nptr);
 int		check_flags(char *arg);
-int		check_split(char *argv);
-int		parse_arguments(int argc, char **argv, int i);
+int		check_split(char *argv, t_stack *stack);
+int		parse_arguments(int argc, char **argv, int i, t_stack *stack);
+void	free_stacks(t_stack *stack);
+void	free_words(char **words);
+void	push(t_stack *stack, int value);
 
 #endif
