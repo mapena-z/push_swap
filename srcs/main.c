@@ -13,6 +13,7 @@
 #include "../includes/push_swap.h"
 #include "../includes/parsing.h"
 #include "../includes/stack_utils.h"
+#include "../includes/algorithms.h"
 #include "debug/debug.h"
 
 int	main(int argc, char **argv)
@@ -49,7 +50,18 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_printf ("historia\n");
+	/* De momento solo llena la pila, y trata de ordenar si son 3 elementos*/
+	ft_printf("Stack A antes: \n");
 	stack_print(stack_a);
+	if (stack_a->size == 3)
+	{
+		/* No ordena nada porque hace falta asignar los indices correctos (están todos a 0)*/
+		alg_three(stack_a);
+	}
+	
+	ft_printf("\n\nStack A despues: \n");
+	stack_print(stack_a);
+	/* ----------------------------------------------------------------------------*/
 	stack_free(stack_a);
 	return (0);
 }
