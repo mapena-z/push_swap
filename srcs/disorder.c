@@ -14,5 +14,28 @@ return mistakes / total_pairs
 
 int	compute_disorder(t_stack *stack)
 {
+	int	mistakes;
+	int	total_pairs;
+	int	i;
+	int	j;
+
+	mistakes = 0;
+	total_pairs = 0;
+	i = 0;
+	while (i < stack->size)
+	{
+		j = i + 1;
+		while (j < stack->size)
+		{
+			total_pairs++;
+			if ()
+			{
+
+			}
+			
+		}
+		i++;
+	}
 	
+
 }
