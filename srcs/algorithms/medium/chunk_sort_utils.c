@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:17 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/14 19:01:18 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/14 19:29:49 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@
 Esto hace que los chunks sean fáciles.
 */
 
-int	ft_sqrt(int nb)
+int	ft_sqrt(int n)
 {
-	int	i;
+	int	r;
 
-	if (nb < 0)
-		return (0);
-	i = 0;
-	while (i * i < nb)
-		i++;
-	if (i * i == nb)
-		return (i);
-	return (0);
+	r = 0;
+	while ((r + 1) * (r + 1) <= n)
+		r++;
+	return (r);
 }
 
 int	get_chunk_size(int n)
@@ -45,14 +41,22 @@ int	get_chunk_size(int n)
 	return (ft_sqrt(n));
 }
 
-int	get_chunk_count(int n, t_stack stack)
+int	get_chunk_count(int n)
 {
-	return stack.size / n;
+	int	count;
+
+	if (n <= 0)
+		return (0);
+	count = ft_sqrt(n);
+	if (count < 1)
+		count = 1;
+	return (count);
 }
 
 void	get_chunk_range(int chunk_id, int chunk_size, int total, int *start, int *end)
 {
-
+	*start = chunk_id * chunk_size;
+	*end = *start + chunk_size - 1;
 }
 
 int	index_in_range(int index, int start, int end)
@@ -64,6 +68,8 @@ int	stack_has_index_in_range(t_stack *stack, int start, int end)
 {
 	t_node *node;
 
+	if (!stack || start > end)
+		return (-1);
 	node = stack->top;
 	while (node)
 	{
