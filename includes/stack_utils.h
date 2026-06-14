@@ -21,5 +21,6 @@ t_node	*stack_get_at(t_stack *stack, int index);
 int		stack_min_pos(t_stack *stack);
 int		stack_max_pos(t_stack *stack);
 int		stack_find_index(t_stack *stack, int index);
+t_node	*stack_find_pos(t_stack *stack, int n);
 
 #endif
