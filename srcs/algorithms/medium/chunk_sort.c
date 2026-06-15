@@ -13,11 +13,6 @@
 #include "../../../includes/push_swap.h"
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
-
-#include "../../../includes/push_swap.h"
-#include "../../../includes/stack_utils.h"
-#include "../../../includes/operations.h"
-
 /* Rota stack_a en la dirección más corta para llevar una posición concreta al top. */
 void	rotate_a_to_pos(t_stack *stack, int pos)
 {
