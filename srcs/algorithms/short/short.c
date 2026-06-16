@@ -6,13 +6,14 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:24 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/14 19:01:25 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/16 18:51:23 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/push_swap.h"
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
+#include "../../../includes/algorithms.h"
 
 void alg_two(t_stack *stack)
 {
