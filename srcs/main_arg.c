@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/10 12:07:41 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:54:19 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	main(int argc, char **argv)
 	assign_indices(stack_a);
 	/* Introducir algoritmo*/
 
-	alg_three(stack_a);
+	//alg_three(stack_a);
+	chunk_sort(stack_a, stack_b);
 	//insertion_basic(stack_a, stack_b);
 	stack_print(stack_a);
 	/* ------------------------------- */

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_alg_test.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/10 12:07:41 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:57:53 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,14 @@ int	main(void)
 
 	stack_a = stack_new('a');
 	stack_b = stack_new('b');
-	create_random_stack(stack_a, 12);
+	create_random_stack(stack_a, 40);
 	assign_indices(stack_a);
 	/* Introducir algoritmo*/
 
 	//alg_three(stack_a);
 	stack_print(stack_a);
-	insertion_basic(stack_a, stack_b);
+	chunk_sort(stack_a, stack_b);
+	//insertion_basic(stack_a, stack_b);
 	stack_print(stack_a);
 	/* ------------------------------- */
 	stack_free(stack_a);

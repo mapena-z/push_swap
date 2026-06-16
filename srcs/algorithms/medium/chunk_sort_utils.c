@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:17 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/16 13:44:46 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:44:39 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,10 @@ int	get_chunk_size(int n)
 */
 int	get_chunk_count(int n)
 {
-	int	count;
-
-	if (n <= 0)
-		return (0);
-	count = ft_sqrt(n);
-	if (count < 1)
-		count = 1;
-	return (count);
+	int	chunk_size;
+	int	chunk_count;
+	chunk_size = get_chunk_size(n);
+	chunk_count = (n + chunk_size - 1) / chunk_size; /* ceil */
 }
 
 /*
