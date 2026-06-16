@@ -18,21 +18,24 @@ void reverse_rotate(t_stack *stack)
 	stack->top = old_bot;
 }
 
-void	rra(t_stack *a)
+void    rra(t_stack *a, int print)
 {
-	reverse_rotate(a);
-	ft_putstr_fd("rra\n", 1);
+    reverse_rotate(a);
+    if (print)
+        ft_putstr_fd("rra\n", 1);
 }
 
-void	rrb(t_stack *b)
+void    rrb(t_stack *b, int print)
 {
-	reverse_rotate(b);
-	ft_putstr_fd("rrb\n", 1);
+    reverse_rotate(b);
+    if (print)
+        ft_putstr_fd("rrb\n", 1);
 }
 
-void	rrr(t_stack *a, t_stack *b)
+void    rrr(t_stack *a, t_stack *b, int print)
 {
-	reverse_rotate(a);
-	reverse_rotate(b);
-	ft_putstr_fd("rrr\n", 1);
+    reverse_rotate(a);
+    reverse_rotate(b);
+    if (print)
+        ft_putstr_fd("rrr\n", 1);
 }

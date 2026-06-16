@@ -15,19 +15,24 @@ void	rotate(t_stack *stack)
 	stack->bot = old_top;
 	stack->top = new_top; 
 }
-void	ra(t_stack *a)
+void    ra(t_stack *a, int print)
 {
-	rotate(a);
-	print_mov(a, 'r');
+    rotate(a);
+    if (print)
+        ft_putstr_fd("ra\n", 1);
 }
-void	rb(t_stack *b)
+
+void    rb(t_stack *b, int print)
 {
-	rotate(b);
-	print_mov(b, 'r');
+    rotate(b);
+    if (print)
+        ft_putstr_fd("rb\n", 1);
 }
-void	rr(t_stack *a, t_stack *b)
+
+void    rr(t_stack *a, t_stack *b, int print)
 {
-	rotate(a);
-	rotate(b);
-	ft_putstr_fd("rr\n", 1);
+    rotate(a);
+    rotate(b);
+    if (print)
+        ft_putstr_fd("rr\n", 1);
 }

@@ -16,20 +16,24 @@ void	swap(t_stack *stack)
 		stack->bot = first;
 }
 
-void	sa(t_stack *a)
+void    sa(t_stack *a, int print)
 {
-	swap(a);
-	print_mov(a, 's');
-}
-void	sb(t_stack *b)
-{
-	swap(b);
-	print_mov(b, 's');
+    swap(a);
+    if (print)
+        ft_putstr_fd("sa\n", 1);
 }
 
-void	ss(t_stack *a, t_stack *b)
+void    sb(t_stack *b, int print)
 {
-	swap(a);
-	swap(b);
-	ft_putstr_fd("ss\n", 1);
+    swap(b);
+    if (print)
+        ft_putstr_fd("sb\n", 1);
+}
+
+void    ss(t_stack *a, t_stack *b, int print)
+{
+    swap(a);
+    swap(b);
+    if (print)
+        ft_putstr_fd("ss\n", 1);
 }

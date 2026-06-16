@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/11 10:38:05 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/16 22:41:14 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,30 @@ int	check_flags(char *arg)
 	return (0);
 }
 
-int	check_split(char *argv, t_stack *stack)
+int check_split(char *argv, t_stack *stack)
 {
-	char	**numbers;
-	int		i;
-	long	value;
+    char    **numbers;
+    int     i;
+    long    value;
 
-	if (!argv || *argv == '\0' || (argv[0] == ' ' && ft_strlen(argv) == 1))
-		return (1);
-	numbers = ft_split(argv, ' ');
-	i = 0;
-	if (numbers != NULL)
-	{
-		while (numbers[i] != NULL)
-		{
-			value = ft_atol(numbers[i]);
-			if (!check_long(value) || !is_number(numbers[i]))
-				return (1);
-			ft_push(stack, value);
-			i++;
-		}
-	}
-	return (0);
+    if (!argv || *argv == '\0' || (argv[0] == ' ' && ft_strlen(argv) == 1))
+        return (1);
+    numbers = ft_split(argv, ' ');
+    if (!numbers)
+        return (1);
+    i = 0;
+    while (numbers[i] != NULL)
+    {
+        value = ft_atol(numbers[i]);
+        if (!check_long(value) || !is_number(numbers[i]))
+            return (free_words(numbers), 1);
+        ft_push(stack, value);
+        if (is_duplicate(stack))
+            return (free_words(numbers), 1);
+        i++;
+    }
+    free_words(numbers);
+    return (0);
 }
 
 int	parse_arguments(int argc, char **argv, int i, t_stack *stack)

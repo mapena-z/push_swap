@@ -12,5 +12,6 @@ long	ft_atol(const char *nptr);
 void	free_stacks(t_stack *stack);
 void	free_words(char **words);
 void	ft_push(t_stack *stack, int value);
+int		is_duplicate(t_stack *stack);
 
 #endif

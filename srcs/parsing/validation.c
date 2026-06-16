@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 12:02:37 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/10 12:03:49 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/16 22:45:01 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,26 @@ long	ft_atol(const char *nptr)
 		i++;
 	}
 	return (result * sign);
+}
+
+int	is_duplicate(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*temp;
+
+	if (!stack || !stack->top)
+		return (0);
+	current = stack->top;
+	while (current)
+	{
+		temp = current->next;
+		while (temp)
+		{
+			if (current->value == temp->value)
+				return (1);
+			temp = temp->next;
+		}
+		current = current->next;
+	}
+	return (0);
 }
