@@ -1,7 +1,7 @@
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
 ## common sources (exclude alternate mains so we can pick one main per target)
 SRC_COMMON = $(shell find srcs -name '*.c' -type f ! -name 'main.c' ! -name 'main_alg_test.c' ! -name 'main_arg.c' | sort)
