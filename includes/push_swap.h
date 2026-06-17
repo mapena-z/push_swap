@@ -31,6 +31,7 @@ typedef struct s_stack
 	t_node	*bot;
 	int		size;
 	char	name;
+	char	fd;
 }	t_stack;
 
 typedef struct s_push_swap

@@ -23,6 +23,7 @@ t_stack	*stack_new(char name)
 	stack->top = NULL;
 	stack->bot = NULL;
 	stack->size = 0;
+	stack->fd = 1;
 	return (stack);
 }
 void	stack_clear(t_stack *stack)

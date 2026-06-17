@@ -14,12 +14,12 @@
 #include "../../includes/operations.h"
 #include "../../includes/stack_utils.h"
 
-void	push(t_stack *src, t_stack *dst)
+void push(t_stack *src, t_stack *dst)
 {
 	t_node *node_aux;
 
 	if (!src || !dst || src->size == 0)
-		return ;
+		return;
 	node_aux = src->top->next;
 	stack_add_front(dst, src->top);
 	src->size--;
@@ -28,13 +28,17 @@ void	push(t_stack *src, t_stack *dst)
 		src->bot = NULL;
 }
 
-void	pa(t_stack *a, t_stack *b)
+void pa(t_stack *a, t_stack *b)
 {
 	push(b, a);
-	print_mov(a, 'p');
+	if (a->fd != -1)
+		ft_putstr_fd("pa\n", a->fd);
+	// print_mov(a, 'p');
 }
-void	pb(t_stack *a, t_stack *b)
+void pb(t_stack *a, t_stack *b)
 {
 	push(a, b);
-	print_mov(b, 'p');
+	if (b->fd != -1)
+		ft_putstr_fd("pb\n", b->fd);
+	// print_mov(b, 'p');
 }

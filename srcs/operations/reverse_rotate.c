@@ -7,7 +7,7 @@ void reverse_rotate(t_stack *stack)
 	t_node *new_bot;
 
 	if (!stack || stack->size <= 1)
-		return ;
+		return;
 	new_bot = stack->top;
 	while (new_bot->next != stack->bot)
 		new_bot = new_bot->next;
@@ -18,24 +18,24 @@ void reverse_rotate(t_stack *stack)
 	stack->top = old_bot;
 }
 
-void    rra(t_stack *a, int print)
+void rra(t_stack *a)
 {
-    reverse_rotate(a);
-    if (print)
-        ft_putstr_fd("rra\n", 1);
+	reverse_rotate(a);
+	if (a->fd != -1)
+		ft_putstr_fd("rra\n", a->fd);
 }
 
-void    rrb(t_stack *b, int print)
+void rrb(t_stack *b)
 {
-    reverse_rotate(b);
-    if (print)
-        ft_putstr_fd("rrb\n", 1);
+	reverse_rotate(b);
+	if (b->fd != -1)
+		ft_putstr_fd("rrb\n", b->fd);
 }
 
-void    rrr(t_stack *a, t_stack *b, int print)
+void rrr(t_stack *a, t_stack *b)
 {
-    reverse_rotate(a);
-    reverse_rotate(b);
-    if (print)
-        ft_putstr_fd("rrr\n", 1);
+	reverse_rotate(a);
+	reverse_rotate(b);
+	if (a->fd != -1)
+		ft_putstr_fd("rrr\n", a->fd);
 }
