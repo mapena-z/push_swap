@@ -27,10 +27,23 @@ int	ft_sqrt(int n)
 
 void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 {
+	int	max_pos;
+	int	i;
+	int	rot_count;
+
 	while (stack_b->size > 0)
 	{
-		rotate_pos_to_top(stack_b, stack_max_pos(stack_b));
+		max_pos = stack_max_pos(stack_b);
+		rotate_pos_to_top(stack_b, max_pos);
 		pa(stack_a, stack_b);
+		rot_count = 0;
+		while (rot_count < stack_a->size - 1 && 
+		       stack_a->top->next && 
+		       stack_a->top->index > stack_a->top->next->index)
+		{
+			rra(stack_a);
+			rot_count++;
+		}
 	}
 }
 

@@ -67,8 +67,9 @@ void	push_chunk_to_b(t_stack *stack_a, t_stack *stack_b, int start, int end)
 		if (!node)
 			break ;
 		rotate_pos_to_top(stack_a, pos);
-		prepare_b_for_push(stack_b);
 		pb(stack_a, stack_b);
+		if (stack_b->size > 1 && stack_b->top->index <= start + ((end - start) / 2))
+			ra(stack_b);
 	}
 }
 
@@ -83,27 +84,62 @@ void	push_back_best_element(t_stack *stack_a, t_stack *stack_b)
 	pa(stack_a, stack_b);
 }
 
+int	ft_pos_of_index(t_stack *s, int target)
+{
+	t_node	*n;
+	int		i;
+
+	if (!s || s->size == 0)
+		return (-1);
+	n = s->top;
+	i = 0;
+	while (i < s->size)
+	{
+		if (n->index == target)
+			return (i);
+		n = n->next;
+		i++;
+	}
+	return (-1);
+}
+
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	chunk_size;
-	int	chunk_count;
-	int	chunk_id;
-	int	start;
-	int	end;
+	int	next;
+	int	window;
+	int	idx;
 
 	if (!stack_a || !stack_b)
 		return ;
-	chunk_size = ft_sqrt(stack_a->size);
-	chunk_count = (stack_a->size + chunk_size - 1) / chunk_size;
-	chunk_id = 0;
-	while (chunk_id < chunk_count)
+	chunk_size = ft_sqrt(stack_a->size) + 1;
+	next = 0;
+	window = chunk_size;
+	while (stack_a->size > 0)
 	{
-		start = chunk_id * chunk_size;
-		end = start + chunk_size - 1;
-		if (end >= stack_a->size)
-			end = stack_a->size - 1;
-		push_chunk_to_b(stack_a, stack_b, start, end);
-		chunk_id++;
+		idx = stack_a->top->index;
+		if (idx <= next)
+		{
+			pb(stack_a, stack_b);
+			if (stack_b->size > 1)
+				ra(stack_b);
+			next++;
+		}
+		else if (idx <= next + window)
+		{
+			pb(stack_a, stack_b);
+			next++;
+		}
+		else
+			ra(stack_a);
 	}
-	push_back_to_a(stack_a, stack_b);
+	while (stack_b->size > 0)
+	{
+		push_back_best_element(stack_a, stack_b);
+	}
+	if (stack_a->size > 0)
+	{
+		idx = stack_min_pos(stack_a);
+		rotate_pos_to_top(stack_a, ft_pos_of_index(stack_a, idx));
+	}
 }
