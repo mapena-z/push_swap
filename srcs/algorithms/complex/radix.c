@@ -44,13 +44,13 @@ void	algorithm(t_stack *stack_a, t_stack *stack_b, int bit)
 void	radix(t_stack *stack_a, t_stack *stack_b)
 {
 	int		bit;
-	int		pasadas;
+	int		trip;
 
 	if (stack_a->size == 0)
 		return ;
 	bit = 1;
-	pasadas = bits_size(stack_a->size) - 1;
-	while (bit <= 1 << pasadas)
+	trip = bits_size(stack_a->size) - 1;
+	while (bit <= 1 << trip)
 	{
 		algorithm(stack_a, stack_b, bit);
 		empty_b(stack_a, stack_b);

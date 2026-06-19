@@ -21,4 +21,7 @@ void	push_back_to_a(t_stack *stack_a, t_stack *stack_b);
 
 /* radix */
 void	radix(t_stack *stack_a, t_stack *stack_b);
+
+/* adaptive */
+double	compute_disorder(t_stack *stack);
 #endif

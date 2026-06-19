@@ -13,6 +13,7 @@
 #include "../../includes/push_swap.h"
 #include "../../includes/operations.h"
 #include "../../includes/stack_utils.h"
+#include "../../includes/benchmark.h"
 
 void push(t_stack *src, t_stack *dst)
 {
@@ -33,6 +34,12 @@ void pa(t_stack *a, t_stack *b)
 	push(b, a);
 	if (a->fd != -1)
 		ft_putstr_fd("pa\n", a->fd);
+	//bench_count_pa(a->bench);
+	if (a->bench)
+	{
+		a->bench->ops.n_pa++;
+		a->bench->ops.total_ops++;
+	}
 	// print_mov(a, 'p');
 }
 void pb(t_stack *a, t_stack *b)
@@ -40,5 +47,11 @@ void pb(t_stack *a, t_stack *b)
 	push(a, b);
 	if (b->fd != -1)
 		ft_putstr_fd("pb\n", b->fd);
+	//bench_count_pb(b->bench);
+	if (a->bench)
+	{
+		a->bench->ops.n_pb++;
+		a->bench->ops.total_ops++;
+	}
 	// print_mov(b, 'p');
 }

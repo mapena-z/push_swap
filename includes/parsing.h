@@ -14,5 +14,8 @@ void	free_words(char **words);
 void	ft_push(t_stack *stack, int value);
 int		is_duplicate(t_stack *stack);
 void    stack_index(t_stack *stack);
+int	has_flag(int argc, char **argv, char *flag);
+int	first_value_arg(int argc, char **argv);
+
 
 #endif

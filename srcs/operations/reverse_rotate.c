@@ -1,5 +1,6 @@
 #include "../../includes/push_swap.h"
 #include "../../includes/operations.h"
+#include "../../includes/benchmark.h"
 
 void reverse_rotate(t_stack *stack)
 {
@@ -23,6 +24,12 @@ void rra(t_stack *a)
 	reverse_rotate(a);
 	if (a->fd != -1)
 		ft_putstr_fd("rra\n", a->fd);
+	//bench_count_rra(a->bench);
+	if (a->bench)
+	{
+		a->bench->ops.n_rra++;
+		a->bench->ops.total_ops++;
+	}
 }
 
 void rrb(t_stack *b)
@@ -30,6 +37,12 @@ void rrb(t_stack *b)
 	reverse_rotate(b);
 	if (b->fd != -1)
 		ft_putstr_fd("rrb\n", b->fd);
+	//bench_count_rrb(b->bench);
+	if (b->bench)
+	{
+		b->bench->ops.n_rrb++;
+		b->bench->ops.total_ops++;
+	}
 }
 
 void rrr(t_stack *a, t_stack *b)
@@ -38,4 +51,10 @@ void rrr(t_stack *a, t_stack *b)
 	reverse_rotate(b);
 	if (a->fd != -1)
 		ft_putstr_fd("rrr\n", a->fd);
+	//bench_count_rrr(a->bench);
+	if (a->bench)
+	{
+		a->bench->ops.n_rrr++;
+		a->bench->ops.total_ops++;
+	}
 }
