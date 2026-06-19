@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 22:37:16 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:34:29 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	//t_stack	*stack_b;
 
 	stack_a = stack_new('a');
+	stack_a->fd = 1;
 	if (!stack_a)
 		return (1);
 	//stack_b = NULL;
@@ -43,7 +44,7 @@ int	main(int argc, char **argv)
 		return (stack_free(stack_a), 0);
 	if (parse_arguments(argc, argv, i, stack_a) == 1)
 		return (stack_free(stack_a), 1);
-	ft_printf ("historia\n");
+	stack_index(stack_a);
 	/* De momento solo llena la pila, y trata de ordenar si son 3 elementos*/
 	ft_printf("Stack A antes: \n");
 	stack_print(stack_a);

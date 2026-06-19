@@ -6,12 +6,35 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 22:41:14 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:27:11 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
+void    stack_index(t_stack *stack)
+{
+    t_node  *current;
+    t_node  *compare;
+    int     count;
+
+    if (!stack || !stack->top)
+        return ;
+    current = stack->top;
+    while (current)
+    {
+        count = 0;
+        compare = stack->top;
+        while (compare)
+        {
+            if (compare->value < current->value)
+                count++;
+            compare = compare->next;
+        }
+        current->index = count;
+        current = current->next;
+    }
+}
 
 int	check_flags(char *arg)
 {

@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 23:09:27 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 23:20:31 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:25:37 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	main(int argc, char **argv)
 	if (argc == 1)
 		return (0);
 	stack_a = stack_new('a');;
+	stack_a->fd = -1;
 	stack_b = stack_new('b');;
+	stack_b->fd = -1;
 	if (!stack_a || !stack_b)
 		return (stack_free(stack_a), stack_free(stack_b), 1);
 	i = 1;

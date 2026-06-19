@@ -29,3 +29,29 @@ void	stack_print_both(t_stack *a, t_stack *b)
 	ft_putstr_fd("\n--- STACK B ---\n", 1);
 	stack_print(b);
 }
+
+void    stack_print_index(t_stack *stack)
+{
+    t_node  *current;
+
+    if (!stack)
+    {
+        ft_printf("Stack no inicializado (NULL)\n");
+        return ;
+    }
+    ft_printf("--- Stack %c (Size: %d) ---\n", stack->name, stack->size);
+    if (!stack->top)
+    {
+        ft_printf("[ Vacio ]\n");
+        ft_printf("-----------------------\n\n");
+        return ;
+    }
+    current = stack->top;
+    while (current)
+    {
+        // Imprime el valor real y su índice alineados
+        ft_printf("Valor: %11d  |  Index: %d\n", current->value, current->index);
+        current = current->next;
+    }
+    ft_printf("-----------------------\n\n");
+}
