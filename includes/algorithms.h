@@ -19,4 +19,6 @@ int		stack_has_index_in_range(t_stack *stack, int start, int end);
 void	rotate_pos_to_top(t_stack *stack, int pos);
 void	push_back_to_a(t_stack *stack_a, t_stack *stack_b);
 
+/* radix */
+void	radix(t_stack *stack_a, t_stack *stack_b);
 #endif

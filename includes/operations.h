@@ -5,10 +5,10 @@
 
 void print_mov(t_stack *stack, char mov);
 /* Stack operations */
-void	push(t_stack *stack_out, t_stack *stack_in);
-void	swap(t_stack *stack);
-void	rotate(t_stack *stack);
-void	reverse_rotate(t_stack *stack);
+//void	push(t_stack *stack_out, t_stack *stack_in);
+//void	swap(t_stack *stack);
+//void	rotate(t_stack *stack);
+//void	reverse_rotate(t_stack *stack);
 
 /* Operations with output */
 void	pa(t_stack *out, t_stack *in);
