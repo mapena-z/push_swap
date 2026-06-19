@@ -15,9 +15,9 @@
 #include "../../../includes/algorithms.h"
 #include "../../../includes/stack_utils.h"
 
-int	ft_sqrt(int n)
+int ft_sqrt(int n)
 {
-	int	r;
+	int r;
 
 	r = 0;
 	while ((r + 1) * (r + 1) <= n)
@@ -25,11 +25,10 @@ int	ft_sqrt(int n)
 	return (r);
 }
 
-void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
+void push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 {
-	int	max_pos;
-	int	i;
-	int	rot_count;
+	int max_pos;
+	int rot_count;
 
 	while (stack_b->size > 0)
 	{
@@ -37,9 +36,9 @@ void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 		rotate_pos_to_top(stack_b, max_pos);
 		pa(stack_a, stack_b);
 		rot_count = 0;
-		while (rot_count < stack_a->size - 1 && 
-		       stack_a->top->next && 
-		       stack_a->top->index > stack_a->top->next->index)
+		while (rot_count < stack_a->size - 1 &&
+			   stack_a->top->next &&
+			   stack_a->top->index > stack_a->top->next->index)
 		{
 			rra(stack_a);
 			rot_count++;
@@ -47,10 +46,10 @@ void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-int	get_chunk_count(int n)
+int get_chunk_count(int n)
 {
-	int	chunk_size;
-	int	chunk_count;
+	int chunk_size;
+	int chunk_count;
 
 	chunk_size = ft_sqrt(n);
 	if (chunk_size <= 0)
@@ -59,9 +58,9 @@ int	get_chunk_count(int n)
 	return (chunk_count);
 }
 
-int	stack_has_index_in_range(t_stack *stack, int start, int end)
+int stack_has_index_in_range(t_stack *stack, int start, int end)
 {
-	t_node	*node;
+	t_node *node;
 
 	if (!stack || stack->size == 0 || start > end)
 		return (0);

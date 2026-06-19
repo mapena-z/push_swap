@@ -16,14 +16,20 @@
 
 static void	rotate_up_b(t_stack *stack_b, int n)
 {
-	while (n-- > 0)
+	while (n > 0)
+	{
 		rb(stack_b);
+		n--;
+	}
 }
 
 static void	rotate_down_b(t_stack *stack_b, int n)
 {
-	while (n-- > 0)
+	while (n > 0)
+	{
 		rrb(stack_b);
+		n--;
+	}
 }
 
 static int	find_insertion_pos(t_stack *stack_b, int index)

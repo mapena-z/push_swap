@@ -69,7 +69,7 @@ void	push_chunk_to_b(t_stack *stack_a, t_stack *stack_b, int start, int end)
 		rotate_pos_to_top(stack_a, pos);
 		pb(stack_a, stack_b);
 		if (stack_b->size > 1 && stack_b->top->index <= start + ((end - start) / 2))
-			ra(stack_b);
+			rb(stack_b);
 	}
 }
 
@@ -136,10 +136,5 @@ void	chunk_sort(t_stack *stack_a, t_stack *stack_b)
 	while (stack_b->size > 0)
 	{
 		push_back_best_element(stack_a, stack_b);
-	}
-	if (stack_a->size > 0)
-	{
-		idx = stack_min_pos(stack_a);
-		rotate_pos_to_top(stack_a, ft_pos_of_index(stack_a, idx));
 	}
 }

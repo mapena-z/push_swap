@@ -88,6 +88,7 @@ int	main(void)
 	//alg_three(stack_a);
 	stack_print(stack_a);
 	chunk_sort(stack_a, stack_b);
+	//insertion_sort(stack_a, stack_b);
 	//insertion_basic(stack_a, stack_b);
 	stack_print(stack_a);
 	/* ------------------------------- */
