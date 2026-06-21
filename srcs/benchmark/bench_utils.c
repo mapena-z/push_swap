@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 18:39:57 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:45:28 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../../includes/benchmark.h"
 #include "../../includes/push_swap.h"
 #include "../../includes/parsing.h"
+#include "../../includes/stack_utils.h"
 
 int	is_bench_mode(int argc, char **argv)
 {
@@ -29,14 +30,31 @@ int	is_bench_mode(int argc, char **argv)
 	return (0);
 }
 
+t_benchmark *create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
+{
+	t_benchmark *bench;
+
+	if (!stack_a || !stack_b)
+		return (stack_free(stack_a, stack_b), NULL);
+	bench = bench_new();
+	if (!bench)
+		return (stack_free(stack_a, stack_b), NULL);
+	set_fd(stack_a, stack_b, -1, bench);
+	setup_benchmark(stack_a, argc, argv);
+	return bench;
+}
+
 static void	set_names(t_benchmark *bench, char *strat_name, char *strat_complex)
 {
 	bench->strategy_name = strat_name;
 	bench->strategy_complexity = strat_complex;
 }
 
-void	setup_benchmark(t_stack *s_a, t_benchmark *bench, int argc, char **argv)
+void	setup_benchmark(t_stack *s_a, int argc, char **argv)
 {
+	t_benchmark *bench;
+
+	bench = s_a->bench;
 	bench->disorder = compute_disorder(s_a);
 	if (s_a->size <= 5)
 		set_names(bench, "small-sort", "0(n²)");
@@ -51,5 +69,4 @@ void	setup_benchmark(t_stack *s_a, t_benchmark *bench, int argc, char **argv)
 	else
 		set_names(bench, "chunk_sort - no_flag", "O(n log n)");
 	s_a->bench = bench;
-	s_a->fd = -1;
 }

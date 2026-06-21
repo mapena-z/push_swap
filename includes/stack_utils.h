@@ -10,7 +10,8 @@ void	node_free(t_node *node);
 /* Stack creation and destruction */
 t_stack	*stack_new(char name);
 void	stack_clear(t_stack *stack);
-void	stack_free(t_stack *stack);
+void	stack_free(t_stack *stack_a, t_stack *stack_b);
+void set_fd(t_stack *stack_a, t_stack *stack_b, int fd, t_benchmark *bench);
 
 /* Stack operations */
 void	stack_add_front(t_stack *stack, t_node *node);

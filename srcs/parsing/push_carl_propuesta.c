@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   push_carl_propuesta.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 10:29:07 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/11 10:37:27 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/21 20:03:26 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include "../../includes/stack_utils.h"
 
-void	free_stacks(t_stack *stack)
-{
-	if (!stack)
-		return ;
-	stack_free(stack);
-}
+// void	free_stacks(t_stack *stack)
+// {
+// 	if (!stack)
+// 		return ;
+// 	stack_free(stack);
+// }
 
 void	free_words(char **words)
 {
