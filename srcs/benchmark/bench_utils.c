@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 20:45:28 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 21:10:19 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_benchmark *create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **a
 	bench = bench_new();
 	if (!bench)
 		return (stack_free(stack_a, stack_b), NULL);
-	set_fd(stack_a, stack_b, -1, bench);
 	setup_benchmark(stack_a, argc, argv);
 	return bench;
 }
@@ -54,6 +53,8 @@ void	setup_benchmark(t_stack *s_a, int argc, char **argv)
 {
 	t_benchmark *bench;
 
+	if (!s_a->bench)
+		return ;
 	bench = s_a->bench;
 	bench->disorder = compute_disorder(s_a);
 	if (s_a->size <= 5)

@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/21 20:53:00 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 21:11:37 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,13 @@ int	main(int argc, char **argv)
 		return (stack_free(stack_a, stack_b), 1);
 	stack_index(stack_a);
 	if (is_bench_mode(argc, argv))
-	{
 		bench = create_bench(stack_a, stack_b, argc, argv);
-		if (!bench)
+	if (is_bench_mode(argc, argv) && !bench)
 			return (stack_free(stack_a, stack_b), 1);
-	}else
-		set_fd(stack_a, stack_b, 1, NULL);
-	stack_print(stack_a); //
+	set_fd(stack_a, stack_b, bench);
+	//stack_print(stack_a); //
 	run_selected_sort(stack_a, stack_b, argc, argv);
 	bench_print(bench);
-	stack_print(stack_a); //
+	//stack_print(stack_a); //
 	return (free (bench), stack_free(stack_a, stack_b), 0);
 }

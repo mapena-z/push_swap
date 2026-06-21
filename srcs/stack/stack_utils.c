@@ -6,20 +6,25 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:41:55 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 20:14:03 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 21:15:16 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void set_fd(t_stack *stack_a, t_stack *stack_b, int fd, t_benchmark *bench)
+void set_fd(t_stack *stack_a, t_stack *stack_b, t_benchmark *bench)
 {
-	stack_a->fd = fd;
-	stack_b->fd = fd;
+
 	if (bench)
 	{
 		stack_a->bench = bench;
 		stack_b->bench = bench;
+		stack_a->fd = -1;
+		stack_b->fd = -1;
+	}else
+	{
+		stack_a->fd = 1;
+		stack_b->fd = 1;
 	}
 }
 
@@ -34,6 +39,7 @@ t_stack	*stack_new(char name)
 	stack->top = NULL;
 	stack->bot = NULL;
 	stack->size = 0;
+	stack->bench = NULL;
 	return (stack);
 }
 void	stack_clear(t_stack *stack)
