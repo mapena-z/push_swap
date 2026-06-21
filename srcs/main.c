@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/21 21:11:37 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 21:42:55 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,24 @@ static void	run_selected_sort(t_stack *stack_a, t_stack *stack_b, int argc, char
 		chunk_sort(stack_a, stack_b);
 	else if (has_flag(argc, argv, "--complex"))
 		radix(stack_a, stack_b);
-	else if (has_flag(argc, argv, "--adaptive"))
+	else if (has_flag(argc, argv, "--adaptive") || argc > 2)
 	{
 		if (compute_disorder(stack_a) < 0.5)
 			insertion_sort(stack_a, stack_b);
 		else
 			chunk_sort(stack_a, stack_b);
 	}
-	else
-		chunk_sort(stack_a, stack_b);
+	//else
+		//has_flag(argc, argv, "--adaptive")
+		//chunk_sort(stack_a, stack_b);
 }
-
-
 
 int	main(int argc, char **argv)
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
-	t_benchmark	*bench;
 	int			start_idx;
 
-	bench = NULL;
 	if (argc == 1)
 		return (0);
 	start_idx = first_value_arg(argc, argv);
@@ -75,13 +72,13 @@ int	main(int argc, char **argv)
 		return (stack_free(stack_a, stack_b), 1);
 	stack_index(stack_a);
 	if (is_bench_mode(argc, argv))
-		bench = create_bench(stack_a, stack_b, argc, argv);
-	if (is_bench_mode(argc, argv) && !bench)
+		create_bench(stack_a, stack_b, argc, argv);
+	if (is_bench_mode(argc, argv) && !stack_a->bench)
 			return (stack_free(stack_a, stack_b), 1);
-	set_fd(stack_a, stack_b, bench);
+	set_fd(stack_a, stack_b);
 	//stack_print(stack_a); //
 	run_selected_sort(stack_a, stack_b, argc, argv);
-	bench_print(bench);
+	bench_print(stack_a->bench);
 	//stack_print(stack_a); //
-	return (free (bench), stack_free(stack_a, stack_b), 0);
+	return (free (stack_a->bench), stack_free(stack_a, stack_b), 0);
 }

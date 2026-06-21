@@ -44,7 +44,7 @@ void	ft_printf_disorder(double disorder)
 	}
 }
 
-void	bench_print(t_benchmark *bench)
+void	bench_print(t_benchmark *bench) // tiene que salir por el 2
 {
 	if (!bench)
 		return ;

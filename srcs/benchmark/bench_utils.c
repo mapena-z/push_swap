@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 21:10:19 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/21 21:21:48 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,18 @@ int	is_bench_mode(int argc, char **argv)
 	return (0);
 }
 
-t_benchmark *create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
+void create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
 {
 	t_benchmark *bench;
 
 	if (!stack_a || !stack_b)
-		return (stack_free(stack_a, stack_b), NULL);
+		return ;
 	bench = bench_new();
 	if (!bench)
-		return (stack_free(stack_a, stack_b), NULL);
+		return ;
 	setup_benchmark(stack_a, argc, argv);
-	return bench;
+	stack_a->bench = bench;
+	stack_b->bench = bench;
 }
 
 static void	set_names(t_benchmark *bench, char *strat_name, char *strat_complex)
