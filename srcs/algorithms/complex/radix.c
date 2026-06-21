@@ -38,6 +38,7 @@ void	algorithm(t_stack *stack_a, t_stack *stack_b, int bit)
 		else
 			ra(stack_a);
 		i++;
+		
 	}
 }
 

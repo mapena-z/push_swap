@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/19 11:34:29 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/21 18:40:24 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 #include "../includes/algorithms.h"
 #include "../includes/benchmark.h"
 #include "debug/debug.h"
-
-
-
-
 
 static void	run_small_sort(t_stack *stack_a, t_stack *stack_b)
 {
@@ -57,44 +53,7 @@ static void	run_selected_sort(t_stack *stack_a, t_stack *stack_b, int argc, char
 		chunk_sort(stack_a, stack_b);
 }
 
-static void	setup_benchmark(t_stack *stack_a, t_stack *stack_b, t_benchmark *bench, int argc, char **argv)
-{
-	bench->disorder = compute_disorder(stack_a);
-	if (stack_a->size <= 5)
-	{
-		bench->strategy_name = "small-sort";
-		bench->strategy_complexity = "O(n^2)";
-	}
-	else if (has_flag(argc, argv, "--simple"))
-	{
-		bench->strategy_name = "insertion_basic";
-		bench->strategy_complexity = "O(n^2)";
-	}
-	else if (has_flag(argc, argv, "--medium"))
-	{
-		bench->strategy_name = "chunk_sort";
-		bench->strategy_complexity = "O(n log n)";
-	}
-	else if (has_flag(argc, argv, "--complex"))
-	{
-		bench->strategy_name = "radix";
-		bench->strategy_complexity = "O(n * k)";
-	}
-	else if (has_flag(argc, argv, "--adaptive"))
-	{
-		bench->strategy_name = "adaptive";
-		bench->strategy_complexity = "dynamic";
-	}
-	else
-	{
-		bench->strategy_name = "chunk_sort";
-		bench->strategy_complexity = "O(n log n)";
-	}
-	stack_a->bench = bench;
-	stack_b->bench = bench;
-	stack_a->fd = -1;
-	stack_b->fd = -1;
-}
+
 
 int	main(int argc, char **argv)
 {
@@ -143,7 +102,9 @@ int	main(int argc, char **argv)
 			stack_free(stack_b);
 			return (1);
 		}
-		setup_benchmark(stack_a, stack_b, bench, argc, argv);
+		setup_benchmark(stack_a, bench, argc, argv);
+		stack_b->bench = bench;
+		stack_b->fd = -1;
 	}
 	stack_print(stack_a);
 	run_selected_sort(stack_a, stack_b, argc, argv);

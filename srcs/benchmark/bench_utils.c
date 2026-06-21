@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bench_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
+/*   Updated: 2026/06/21 18:39:57 by carlinaq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/algorithms.h"
-#include "../../includes/push_swap.h"
 #include "../../includes/benchmark.h"
+#include "../../includes/push_swap.h"
+#include "../../includes/parsing.h"
 
 int	is_bench_mode(int argc, char **argv)
 {
@@ -16,5 +29,27 @@ int	is_bench_mode(int argc, char **argv)
 	return (0);
 }
 
+static void	set_names(t_benchmark *bench, char *strat_name, char *strat_complex)
+{
+	bench->strategy_name = strat_name;
+	bench->strategy_complexity = strat_complex;
+}
 
-
+void	setup_benchmark(t_stack *s_a, t_benchmark *bench, int argc, char **argv)
+{
+	bench->disorder = compute_disorder(s_a);
+	if (s_a->size <= 5)
+		set_names(bench, "small-sort", "0(n²)");
+	else if (has_flag(argc, argv, "--simple"))
+		set_names(bench, "insertion_basic", "0(n²)");
+	else if (has_flag(argc, argv, "--medium"))
+		set_names(bench, "chunk_sort", "O(n log n)");
+	else if (has_flag(argc, argv, "--complex"))
+		set_names(bench, "radix", "O(n * k)");
+	else if (has_flag(argc, argv, "--adaptive"))
+		set_names(bench, "adaptive", "dynamic");
+	else
+		set_names(bench, "chunk_sort - no_flag", "O(n log n)");
+	s_a->bench = bench;
+	s_a->fd = -1;
+}
