@@ -24,4 +24,5 @@ void	radix(t_stack *stack_a, t_stack *stack_b);
 
 /* adaptive */
 double	compute_disorder(t_stack *stack);
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
 #endif

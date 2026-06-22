@@ -45,6 +45,7 @@ typedef struct s_benchmark
 {
 	double disorder;
 	char *strategy_name;
+	const char *adaptive_strategy;
 	char *strategy_complexity;
 	t_metrics ops;
 } t_benchmark;
