@@ -10,6 +10,9 @@ void	alg_four(t_stack *a, t_stack *b);
 void	alg_five(t_stack *a, t_stack *b);
 void	insertion_basic(t_stack *stack_a, t_stack *stack_b);
 void	insertion_sort(t_stack *stack_a, t_stack *stack_b);
+void	selection_sort(t_stack *stack_a, t_stack *stack_b);
+void	turk_sort(t_stack *stack_a, t_stack *stack_b);
+
 
 /* Medium algorithm -> Chunk Sort */
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b);
