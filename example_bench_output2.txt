@@ -1,5 +1,0 @@
-[bench] disorder: 27.00%
-[bench] strategy: Adaptive / chunk_sort
-[bench] total_ops: 15
-[bench]   sa: 0    sb: 0    ss: 0   pa: 6    pb: 6
-[bench]   ra: 2    rb: 0    rr: 0  rra: 1   rrb: 0   rrr: 0

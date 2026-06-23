@@ -15,7 +15,7 @@
 #include "../../includes/stack_utils.h"
 #include "../../includes/benchmark.h"
 
-void push(t_stack *src, t_stack *dst)
+static void push(t_stack *src, t_stack *dst)
 {
 	t_node *node_aux;
 

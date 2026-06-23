@@ -51,50 +51,50 @@ void	alg_three(t_stack *a)
 }
 
 
-void	alg_four(t_stack *a, t_stack *b)
-{
-	int	pos;
-
-	pos = stack_find_index(a, 0);
-	if (pos == 1)
-		sa(a);
-	else if (pos == 2)
-	{
-		ra(a);
-		ra(a);
-	}
-	else if (pos == 3)
-		rra(a);
-	pb(b, a);
-	alg_three(a);
-	pa(a, b);
-}
-
 void	bring_index_to_top(t_stack *a, int target)
 {
 	int	pos;
+	int	moves;
+	int	count;
 
 	pos = stack_find_index(a, target);
-	if (pos == 1)
-		sa(a);
-	else if (pos == 2)
+	if (!a || pos < 0)
+		return ;
+	if (pos == 0)
+		return ;
+	if (pos <= a->size / 2)
 	{
-		ra(a);
-		ra(a);
+		count = 0;
+		while (count < pos)
+		{
+			ra(a);
+			count++;
+		}
 	}
-	else if (pos == 3)
+	else
 	{
-		rra(a);
-		rra(a);
+		moves = a->size - pos;
+		count = 0;
+		while (count < moves)
+		{
+			rra(a);
+			count++;
+		}
 	}
-	else if (pos == 4)
-		rra(a);
+}
+
+void	alg_four(t_stack *a, t_stack *b)
+{
+	bring_index_to_top(a, 0);
+	pb(a, b);
+	alg_three(a);
+	pa(a, b);
 }
 
 void	alg_five(t_stack *a, t_stack *b)
 {
 	bring_index_to_top(a, 0);
-	pb(b, a);
+	pb(a, b);
 	bring_index_to_top(a, 1);
 	pb(a, b);
 	alg_three(a);

@@ -10,79 +10,165 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/push_swap.h"
+#include "../../../includes/algorithms.h"
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
 
-static void	rotate_up_b(t_stack *stack_b, int n)
+typedef struct s_move_plan
 {
-	while (n > 0)
+	int	rot_a;
+	int	rot_b;
+	int	dir_a;
+	int	dir_b;
+	int	cost;
+}	t_move_plan;
+
+static int	max_int(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+static void	rotate_single(t_stack *stack, int direction)
+{
+	if (!stack)
+		return ;
+	if (direction > 0)
 	{
-		rb(stack_b);
-		n--;
+		if (stack->name == 'b')
+			rb(stack);
+		else
+			ra(stack);
+	}
+	else
+	{
+		if (stack->name == 'b')
+			rrb(stack);
+		else
+			rra(stack);
 	}
 }
 
-static void	rotate_down_b(t_stack *stack_b, int n)
-{
-	while (n > 0)
-	{
-		rrb(stack_b);
-		n--;
-	}
-}
-
-static int	find_insertion_pos(t_stack *stack_b, int index)
+static int	insertion_pos_desc(t_stack *stack_b, int index)
 {
 	t_node	*node;
 	int		pos;
 	int		min_pos;
 	int		max_pos;
+	int		min_index;
+	int		max_index;
 
-	if (!stack_b || stack_b->size == 0)
-		return (0);
-	if (stack_b->size == 1)
+	if (!stack_b || stack_b->size <= 1)
 		return (0);
 	min_pos = stack_min_pos(stack_b);
 	max_pos = stack_max_pos(stack_b);
-	if (index > stack_get_at(stack_b, max_pos)->index)
+	min_index = stack_get_at(stack_b, min_pos)->index;
+	max_index = stack_get_at(stack_b, max_pos)->index;
+	if (index > max_index || index < min_index)
 		return (max_pos);
-	if (index < stack_get_at(stack_b, min_pos)->index)
-		return ((min_pos + 1) % stack_b->size);
 	node = stack_b->top;
 	pos = 0;
-	while (node && node->next)
+	while (node)
 	{
-		if (node->index > index && node->next->index < index)
-			return (pos + 1);
+		if (node->index < index)
+			return (pos);
 		node = node->next;
 		pos++;
 	}
-	return (0);
+	return (max_pos);
 }
 
-static void	prepare_b(t_stack *stack_b, int pos)
+static void	update_best_plan(t_move_plan *best, int rot_a, int rot_b,
+	int dir_a, int dir_b)
 {
-	if (!stack_b || stack_b->size == 0)
-		return ;
-	if (pos <= stack_b->size / 2)
-		rotate_up_b(stack_b, pos);
+	int	cost;
+
+	if (dir_a == dir_b)
+		cost = max_int(rot_a, rot_b);
 	else
-		rotate_down_b(stack_b, stack_b->size - pos);
+		cost = rot_a + rot_b;
+	if (cost < best->cost)
+	{
+		best->rot_a = rot_a;
+		best->rot_b = rot_b;
+		best->dir_a = dir_a;
+		best->dir_b = dir_b;
+		best->cost = cost;
+	}
+}
+
+static t_move_plan	find_best_plan(t_stack *stack_a, t_stack *stack_b)
+{
+	t_move_plan	best;
+	t_node		*node;
+	int			pos_a;
+	int			pos_b;
+	int			rev_a;
+	int			rev_b;
+
+	best.rot_a = 0;
+	best.rot_b = 0;
+	best.dir_a = 1;
+	best.dir_b = 1;
+	best.cost = INT_MAX;
+	node = stack_a->top;
+	pos_a = 0;
+	while (node)
+	{
+		pos_b = insertion_pos_desc(stack_b, node->index);
+		rev_a = stack_a->size - pos_a;
+		rev_b = stack_b->size - pos_b;
+		update_best_plan(&best, pos_a, pos_b, 1, 1);
+		update_best_plan(&best, rev_a, rev_b, -1, -1);
+		update_best_plan(&best, pos_a, rev_b, 1, -1);
+		update_best_plan(&best, rev_a, pos_b, -1, 1);
+		node = node->next;
+		pos_a++;
+	}
+	return (best);
+}
+
+static void	execute_plan(t_stack *stack_a, t_stack *stack_b, t_move_plan plan)
+{
+	while (plan.rot_a > 0 && plan.rot_b > 0 && plan.dir_a == plan.dir_b)
+	{
+		if (plan.dir_a > 0)
+			rr(stack_a, stack_b);
+		else
+			rrr(stack_a, stack_b);
+		plan.rot_a--;
+		plan.rot_b--;
+	}
+	while (plan.rot_a-- > 0)
+		rotate_single(stack_a, plan.dir_a);
+	while (plan.rot_b-- > 0)
+		rotate_single(stack_b, plan.dir_b);
+	pb(stack_a, stack_b);
+}
+
+static void	push_back_sorted(t_stack *stack_a, t_stack *stack_b)
+{
+	int	pos;
+
+	while (stack_b->size > 0)
+	{
+		pos = stack_max_pos(stack_b);
+		rotate_pos_to_top(stack_b, pos);
+		pa(stack_a, stack_b);
+	}
 }
 
 void	insertion_sort(t_stack *stack_a, t_stack *stack_b)
 {
-	int	pos;
+	t_move_plan	plan;
 
 	if (!stack_a || !stack_b)
 		return ;
 	while (stack_a->size > 0)
 	{
-		pos = find_insertion_pos(stack_b, stack_a->top->index);
-		prepare_b(stack_b, pos);
-		pb(stack_a, stack_b);
+		plan = find_best_plan(stack_a, stack_b);
+		execute_plan(stack_a, stack_b, plan);
 	}
-	while (stack_b->size > 0)
-		pa(stack_a, stack_b);
+	push_back_sorted(stack_a, stack_b);
 }

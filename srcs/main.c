@@ -19,8 +19,30 @@
 
 static void	run_selected_sort(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
 {
+	if (compute_disorder(stack_a) == 0)
+		return ;
+	if (stack_a->size == 2)
+	{
+		alg_two(stack_a);
+		return ;
+	}
+	if (stack_a->size == 3)
+	{
+		alg_three(stack_a);
+		return ;
+	}
+	if (stack_a->size == 4)
+	{
+		alg_four(stack_a, stack_b);
+		return ;
+	}
+	if (stack_a->size == 5)
+	{
+		alg_five(stack_a, stack_b);
+		return ;
+	}
 	if (has_flag(argc, argv, "--simple"))
-		insertion_basic(stack_a, stack_b);
+		insertion_sort(stack_a, stack_b);
 	else if (has_flag(argc, argv, "--medium"))
 		chunk_sort(stack_a, stack_b);
 	else if (has_flag(argc, argv, "--complex"))

@@ -46,8 +46,27 @@ void	final_check(t_stack *stack_a, t_stack *stack_b)
 	stack_free(stack_a, stack_b);
 }
 
+static int	is_blank_line(char *line)
+{
+	int	i;
+
+	if (!line)
+		return (1);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n'
+			&& line[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	read_input(t_stack *stack_a, t_stack *stack_b, char *line)
 {
+	if (is_blank_line(line))
+		return ;
 	if (ft_strncmp(line, "sa\n", 3) == 0)
 		sa(stack_a);
 	else if (ft_strncmp(line, "sb\n", 3) == 0)

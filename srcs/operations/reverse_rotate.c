@@ -2,7 +2,7 @@
 #include "../../includes/operations.h"
 #include "../../includes/benchmark.h"
 
-void reverse_rotate(t_stack *stack)
+static void reverse_rotate(t_stack *stack)
 {
 	t_node *old_bot;
 	t_node *new_bot;

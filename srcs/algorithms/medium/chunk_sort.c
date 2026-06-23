@@ -23,6 +23,26 @@ void	prepare_b_for_push(t_stack *stack_b)
 	rotate_pos_to_top(stack_b, max_index);
 }
 
+static void	rotate_up(t_stack *stack)
+{
+	if (!stack)
+		return ;
+	if (stack->name == 'b')
+		rb(stack);
+	else
+		ra(stack);
+}
+
+static void	reverse_rotate_down(t_stack *stack)
+{
+	if (!stack)
+		return ;
+	if (stack->name == 'b')
+		rrb(stack);
+	else
+		rra(stack);
+}
+
 void	rotate_pos_to_top(t_stack *stack, int pos)
 {
 	int	count;
@@ -34,7 +54,7 @@ void	rotate_pos_to_top(t_stack *stack, int pos)
 	{
 		while (count < pos)
 		{
-			ra(stack);
+			rotate_up(stack);
 			count++;
 		}
 	}
@@ -42,7 +62,7 @@ void	rotate_pos_to_top(t_stack *stack, int pos)
 	{
 		while (count < stack->size - pos)
 		{
-			rra(stack);
+			reverse_rotate_down(stack);
 			count++;
 		}
 	}
@@ -106,35 +126,24 @@ int	ft_pos_of_index(t_stack *s, int target)
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	chunk_size;
-	int	next;
-	int	window;
-	int	idx;
+	int	total_size;
+	int	start;
+	int	end;
 
 	if (!stack_a || !stack_b)
 		return ;
-	chunk_size = ft_sqrt(stack_a->size) + 1;
-	next = 0;
-	window = chunk_size;
+	total_size = stack_a->size;
+	chunk_size = ft_sqrt(total_size) + 1;
+	start = 0;
+	end = chunk_size - 1;
 	while (stack_a->size > 0)
 	{
-		idx = stack_a->top->index;
-		if (idx <= next)
-		{
-			pb(stack_a, stack_b);
-			if (stack_b->size > 1)
-				ra(stack_b);
-			next++;
-		}
-		else if (idx <= next + window)
-		{
-			pb(stack_a, stack_b);
-			next++;
-		}
-		else
-			ra(stack_a);
+		if (end >= total_size)
+			end = total_size - 1;
+		push_chunk_to_b(stack_a, stack_b, start, end);
+		start = end + 1;
+		end = start + chunk_size - 1;
 	}
 	while (stack_b->size > 0)
-	{
 		push_back_best_element(stack_a, stack_b);
-	}
 }

@@ -2,7 +2,7 @@
 #include "../../includes/operations.h"
 #include "../../includes/benchmark.h"
 
-void rotate(t_stack *stack)
+static void rotate(t_stack *stack)
 {
 	t_node *old_top;
 	t_node *new_top;
