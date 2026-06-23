@@ -2,55 +2,23 @@
 
 Este documento recoge los fallos que no dependen de la lógica de ordenación interna.
 
-## Resumen del tester
+## Estado actual
 
-- El parsing de entrada ya pasa las pruebas de formato, duplicados y rangos.
-- Las entradas ya ordenadas devuelven 0 operaciones.
-- El modo `--bench` sigue apareciendo como incompleto en algunas ejecuciones, aunque la salida ya va por `fd 2`.
-- En varias combinaciones de `--bench` el tester no consigue leer bien la estrategia o el porcentaje de desorden.
+- El parsing y la validación de entrada ya pasan.
+- Los tests básicos y los casos límite están verdes.
+- Quedan solo tareas de limpieza de warnings o de estabilidad del reporte del tester.
 
-## Fallos detectados
+## Tareas pendientes
 
-- [ ] .
+- [ ] Revisar los 5 warnings del tester y decidir si requieren ajuste de salida o de formato.
+- [ ] Confirmar que el reporte de `--bench` sigue siendo estable en todas las combinaciones.
+- [ ] Repetir el suite completo tras cualquier ajuste de salida o formato.
 
 ## Lo que ya está bien
 
 - [x] El parsing acepta valores válidos, incluidos `INT_MIN` e `INT_MAX`.
 - [x] El parsing rechaza correctamente números inválidos y duplicados.
 - [x] Las entradas ya ordenadas no generan movimientos.
-- [x] La salida del benchmark ya se escribe en `fd 2`.
-- [x] El benchmark ya diferencia la estrategia adaptativa interna cuando puede leerla.
+- [x] La salida del benchmark se escribe en `fd 2`.
 - [x] La ruta sin flags ya quedó alineada con `--adaptive`.
-- [x] Correccion de leaks del checker, ya recibe parametros y libera sin problemas.
-- [X] Aparece la estrategia en ejecuciones como `--bench --simple`, `--bench --medium` y `--bench --complex` cuando esta ordenado
-- [X] El porcentaje de desorden del benchmark ya se lee correctamente.
-- [X] La salida del benchmark se mantiene en `fd 2` y sigue el formato esperado por el tester.
-- [X] El reporte de `--bench` se interpreta de forma consistente en el tester.
-
-## Hipótesis
-
-- El problema ya no parece ser de parsing.
-- El punto débil está en el reporte de benchmark y en cómo el tester interpreta esa salida.
-- Puede haber un desajuste entre el formato exacto que imprime el programa y el patrón que espera el tester.
-
-## Roadmap de corrección
-
-### Fase 1: Verificar formato exacto
-
-- [ ] Revisar el texto exacto que espera el tester para `--bench`.
-- [ ] Comparar la salida real del programa con ese formato.
-- [ ] Asegurar que `disorder` y `strategy` siempre salen en la misma estructura.
-
-### Fase 2: Confirmar todos los modos de benchmark
-
-- [ ] Probar `--bench --simple`.
-- [ ] Probar `--bench --medium`.
-- [ ] Probar `--bench --complex`.
-- [ ] Probar `--bench --adaptive`.
-- [ ] Verificar que el tester reconoce estrategia y desorden en todos ellos.
-
-### Fase 3: Validación final
-
-- [ ] Repetir el tester completo.
-- [ ] Confirmar que benchmark deja de salir como aviso o incompleto.
-- [ ] Mantener el resto del comportamiento sin cambios.
+- [x] El checker recibe parámetros y libera correctamente.
