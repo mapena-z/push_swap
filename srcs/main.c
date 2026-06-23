@@ -80,6 +80,7 @@ int	main(int argc, char **argv)
 		return (bench_free(stack_a->bench), stack_free(stack_a, stack_b), 0);
 	}
 	set_fd(stack_a, stack_b);
+	
 	//stack_print(stack_a); //
 	run_selected_sort(stack_a, stack_b, argc, argv);
 	bench_print(stack_a->bench);

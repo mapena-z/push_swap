@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:24 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/16 18:51:23 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/23 13:30:00 by copilot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../../includes/stack_utils.h"
 #include "../../../includes/algorithms.h"
 
-void alg_two(t_stack *stack)
+void	alg_two(t_stack *stack)
 {
 	if (!stack || stack->size != 2)
 		return ;
@@ -23,15 +23,15 @@ void alg_two(t_stack *stack)
 		sa(stack);
 }
 
-void	alg_three(t_stack *a)
+static void	sort_three_with_offset(t_stack *a, int offset)
 {
 	int	first;
 	int	second;
 	int	third;
 
-	first = a->top->index;
-	second = a->top->next->index;
-	third = a->bot->index;
+	first = a->top->index - offset;
+	second = a->top->next->index - offset;
+	third = a->bot->index - offset;
 	if (first == 0 && second == 2 && third == 1)
 	{
 		sa(a);
@@ -50,6 +50,12 @@ void	alg_three(t_stack *a)
 	}
 }
 
+void	alg_three(t_stack *a)
+{
+	if (!a || a->size != 3)
+		return ;
+	sort_three_with_offset(a, 0);
+}
 
 void	bring_index_to_top(t_stack *a, int target)
 {
@@ -87,7 +93,7 @@ void	alg_four(t_stack *a, t_stack *b)
 {
 	bring_index_to_top(a, 0);
 	pb(a, b);
-	alg_three(a);
+	sort_three_with_offset(a, 1);
 	pa(a, b);
 }
 
@@ -97,7 +103,7 @@ void	alg_five(t_stack *a, t_stack *b)
 	pb(a, b);
 	bring_index_to_top(a, 1);
 	pb(a, b);
-	alg_three(a);
+	sort_three_with_offset(a, b->size);
 	pa(a, b);
 	pa(a, b);
 }
