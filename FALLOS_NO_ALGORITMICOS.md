@@ -11,10 +11,7 @@ Este documento recoge los fallos que no dependen de la lógica de ordenación in
 
 ## Fallos detectados
 
-- [ ] El reporte de `--bench` no se interpreta de forma consistente en el tester.
-- [ ] En algunas ejecuciones de `--bench --simple`, `--bench --medium` y `--bench --complex` la estrategia aparece como ausente.
-- [ ] El porcentaje de desorden reportado por benchmark no siempre se lee correctamente desde el tester.
-- [ ] La salida del benchmark debe mantenerse estrictamente en `fd 2` y seguir el formato esperado por el tester.
+- [ ] .
 
 ## Lo que ya está bien
 
@@ -24,6 +21,11 @@ Este documento recoge los fallos que no dependen de la lógica de ordenación in
 - [x] La salida del benchmark ya se escribe en `fd 2`.
 - [x] El benchmark ya diferencia la estrategia adaptativa interna cuando puede leerla.
 - [x] La ruta sin flags ya quedó alineada con `--adaptive`.
+- [x] Correccion de leaks del checker, ya recibe parametros y libera sin problemas.
+- [X] Aparece la estrategia en ejecuciones como `--bench --simple`, `--bench --medium` y `--bench --complex` cuando esta ordenado
+- [X] El porcentaje de desorden del benchmark ya se lee correctamente.
+- [X] La salida del benchmark se mantiene en `fd 2` y sigue el formato esperado por el tester.
+- [X] El reporte de `--bench` se interpreta de forma consistente en el tester.
 
 ## Hipótesis
 

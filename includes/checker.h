@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 22:49:53 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 23:10:20 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/23 11:30:11 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CHECKER_H
 
 # include "push_swap.h"
+# include "operations.h"
+# include "stack_utils.h"
 
 void	read_input(t_stack *stack_a, t_stack *stack_b, char *line);
 void	final_check(t_stack *stack_a, t_stack *stack_b);

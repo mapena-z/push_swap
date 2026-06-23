@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bench_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 21:21:48 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/23 11:50:47 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,31 @@ static void	set_adaptive_choice(t_benchmark *bench, char *strategy, char *comple
 	bench->strategy_complexity = complexity;
 }
 
-void	setup_benchmark(t_stack *s_a, int argc, char **argv)
+void    setup_benchmark(t_stack *s_a, int argc, char **argv)
 {
-	t_benchmark *bench;
+    t_benchmark *bench;
 
-	if (!s_a->bench)
-		return ;
-	bench = s_a->bench;
-	bench->disorder = compute_disorder(s_a);
-	bench->adaptive_strategy = NULL;
-	if (bench->disorder == 0)
-	{
-		set_names(bench, "already_sorted", "0 moves");
-		return ;
-	}
-	if (has_flag(argc, argv, "--simple"))
-		set_names(bench, "insertion_basic", "0(n²)");
-	else if (has_flag(argc, argv, "--medium"))
-		set_names(bench, "chunk_sort", "O(n log n)");
-	else if (has_flag(argc, argv, "--complex"))
-		set_names(bench, "radix", "O(n * k)");
-	else if (bench->disorder < 0.2)
-		set_adaptive_choice(bench, "insertion_sort", "O(n)");
-	else if (bench->disorder < 0.5)
-		set_adaptive_choice(bench, "chunk_sort", "O(n sqrt(n))");
-	else
-		set_adaptive_choice(bench, "radix", "O(n log n)");
-	s_a->bench = bench;
+    if (!s_a->bench)
+        return ;
+    bench = s_a->bench;
+    bench->disorder = compute_disorder(s_a);
+    bench->adaptive_strategy = NULL;
+    if (has_flag(argc, argv, "--simple"))
+        set_names(bench, "insertion_basic", "O(n²)");
+    else if (has_flag(argc, argv, "--medium"))
+        set_names(bench, "chunk_sort", "O(n log n)");
+    else if (has_flag(argc, argv, "--complex"))
+        set_names(bench, "radix", "O(n * k)");
+    else
+    {
+        if (bench->disorder < 0.2)
+            set_adaptive_choice(bench, "insertion_sort", "O(n)");
+        else if (bench->disorder < 0.5)
+            set_adaptive_choice(bench, "chunk_sort", "O(n sqrt(n))");
+        else
+            set_adaptive_choice(bench, "radix", "O(n log n)");
+    }
+    if (bench->disorder == 0)
+        bench->strategy_complexity = "0 moves (already_sorted)";
+    s_a->bench = bench;
 }

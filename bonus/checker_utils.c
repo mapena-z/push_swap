@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 23:10:38 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 23:11:07 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/23 11:30:48 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	checker_error(t_stack *stack_a, t_stack *stack_b, char *line)
 {
 	if (line)
 		free(line);
-	stack_free(stack_a);
-	stack_free(stack_b);
+	stack_free(stack_a, stack_b);
 	write(2, "Error\n", 6);
 	exit(1);
 }
@@ -44,8 +43,7 @@ void	final_check(t_stack *stack_a, t_stack *stack_b)
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-	stack_free(stack_a);
-	stack_free(stack_b);
+	stack_free(stack_a, stack_b);
 }
 
 void	read_input(t_stack *stack_a, t_stack *stack_b, char *line)

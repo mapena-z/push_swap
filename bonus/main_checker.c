@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 23:09:27 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/19 11:25:37 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/23 11:31:33 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int argc, char **argv)
 	stack_b = stack_new('b');;
 	stack_b->fd = -1;
 	if (!stack_a || !stack_b)
-		return (stack_free(stack_a), stack_free(stack_b), 1);
+		return (stack_free(stack_a , stack_b), 1);
 	i = 1;
 	if (parse_arguments(argc, argv, i, stack_a) == 1)
-		return (stack_free(stack_a), stack_free(stack_b), 1);
+		return (stack_free(stack_a, stack_b), 1);
 	line = get_next_line(0);
 	while (line != NULL)
 	{
