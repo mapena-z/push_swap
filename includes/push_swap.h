@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 19:42:03 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 18:26:18 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 18:46:20 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,12 @@ typedef struct s_stack
 	char		fd;
 	t_benchmark	*bench;
 }	t_stack;
+
+typedef struct s_move
+{
+	int	pos_a;
+	int	pos_b;
+	int	cost;
+}	t_move;
 
 #endif

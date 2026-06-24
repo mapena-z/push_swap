@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 11:30:00 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 17:46:12 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 18:46:14 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "../../../includes/algorithms.h"
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
+#include "../../../includes/push_swap.h"
 
 /* -------------------------------------------------------------------------- */
 /*  COST CALCULATION                                                           */
@@ -119,12 +120,7 @@ static int	compute_cost(t_stack *stack_a, t_stack *stack_b,
 /*  BEST CANDIDATE SELECTION                                                   */
 /* -------------------------------------------------------------------------- */
 
-typedef struct s_move
-{
-	int	pos_a;
-	int	pos_b;
-	int	cost;
-}	t_move;
+
 
 /*
 ** Iterates every element in A and finds the one with the lowest total cost
