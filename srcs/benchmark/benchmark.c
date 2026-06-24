@@ -11,7 +11,7 @@ void	bench_putdisorder_fd(double disorder, int fd)
 	if (disorder_100 >= 100)
 	{
 		ft_putstr_fd("100.00%", fd);
-		return;
+		return ;
 	}
 	ft_putnbr_fd(disorder_100, fd);
 	ft_putstr_fd(".00%", fd);
@@ -37,10 +37,10 @@ t_benchmark	*bench_new(void)
 	return (bench);
 }
 
-void bench_print(t_benchmark *bench)
+void	bench_print(t_benchmark *bench)
 {
 	if (!bench)
-		return;
+		return ;
 	ft_putstr_fd("[bench] disorder: ", 2);
 	bench_putdisorder_fd(bench->disorder, 2);
 	ft_putchar_fd('\n', 2);
