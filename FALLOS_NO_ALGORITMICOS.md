@@ -10,9 +10,7 @@ Este documento recoge los fallos que no dependen de la lógica de ordenación in
 
 ## Tareas pendientes
 
-- [ ] Revisar los 5 warnings del tester y decidir si requieren ajuste de salida o de formato.
-- [ ] Confirmar que el reporte de `--bench` sigue siendo estable en todas las combinaciones.
-- [ ] Repetir el suite completo tras cualquier ajuste de salida o formato.
+- [ ] .
 
 ## Lo que ya está bien
 
@@ -22,3 +20,6 @@ Este documento recoge los fallos que no dependen de la lógica de ordenación in
 - [x] La salida del benchmark se escribe en `fd 2`.
 - [x] La ruta sin flags ya quedó alineada con `--adaptive`.
 - [x] El checker recibe parámetros y libera correctamente.
+- [X] Confirmado que el reporte de `--bench` es estable en todas las combinaciones.
+- [X] El checker pasa todos los tests del checker y la norminette (checkear en 42 por si acaso).
+- [X] Tras los cambios al bench todo sigue funcionando sin problemas.

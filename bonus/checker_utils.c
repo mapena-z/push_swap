@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 23:10:38 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/23 11:30:48 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/24 11:50:51 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,8 @@ void	final_check(t_stack *stack_a, t_stack *stack_b)
 	stack_free(stack_a, stack_b);
 }
 
-static int	is_blank_line(char *line)
-{
-	int	i;
-
-	if (!line)
-		return (1);
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n'
-			&& line[i] != '\r')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 void	read_input(t_stack *stack_a, t_stack *stack_b, char *line)
 {
-	if (is_blank_line(line))
-		return ;
 	if (ft_strncmp(line, "sa\n", 3) == 0)
 		sa(stack_a);
 	else if (ft_strncmp(line, "sb\n", 3) == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:41:55 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/21 21:23:16 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 11:28:33 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,8 @@
 
 void set_fd(t_stack *stack_a, t_stack *stack_b)
 {
-
-	if (stack_a->bench)
-	{
-		stack_a->fd = -1;
-		stack_b->fd = -1;
-	}else
-	{
-		stack_a->fd = 1;
-		stack_b->fd = 1;
-	}
+	stack_a->fd = 1;
+	stack_b->fd = 1;
 }
 
 t_stack	*stack_new(char name)

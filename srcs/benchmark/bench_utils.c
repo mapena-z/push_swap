@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/23 11:50:47 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/24 11:36:17 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ void	setup_benchmark(t_stack *s_a, int argc, char **argv)
 		return ;
 	}
 	if (has_flag(argc, argv, "--simple"))
-		set_names(bench, "insertion_sort", "O(n log n)");
+		set_names(bench, "simple", "O(n log n)");
 	else if (has_flag(argc, argv, "--medium"))
-		set_names(bench, "chunk_sort", "O(n log n)");
+		set_names(bench, "medium", "O(n log n)");
 	else if (has_flag(argc, argv, "--complex"))
-		set_names(bench, "radix", "O(n * k)");
+		set_names(bench, "complex", "O(n * k)");
 	else if (bench->disorder < 0.2)
 		set_adaptive_choice(bench, "insertion_sort", "O(n)");
 	else if (bench->disorder < 0.5)
