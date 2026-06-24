@@ -13,14 +13,20 @@ void	insertion_sort(t_stack *stack_a, t_stack *stack_b);
 void	selection_sort(t_stack *stack_a, t_stack *stack_b);
 void	turk_sort(t_stack *stack_a, t_stack *stack_b);
 
+/* short*/
+void	bring_index_to_top(t_stack *a, int target);
+void	sort_three_with_offset(t_stack *a, int offset);
 
 /* Medium algorithm -> Chunk Sort */
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b);
 int		ft_sqrt(int nb);
-int		get_chunk_count(int n);
+void	prepare_b_for_push(t_stack *stack_b);
+void	rotate_up(t_stack *stack);
+void	reverse_rotate_down(t_stack *stack);
+//int		get_chunk_count(int n);
 int		stack_has_index_in_range(t_stack *stack, int start, int end);
 void	rotate_pos_to_top(t_stack *stack, int pos);
-void	push_back_to_a(t_stack *stack_a, t_stack *stack_b);
+//void	push_back_to_a(t_stack *stack_a, t_stack *stack_b);
 
 /* radix */
 void	radix(t_stack *stack_a, t_stack *stack_b);

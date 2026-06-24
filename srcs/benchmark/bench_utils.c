@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bench_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 11:36:17 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:48:09 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	is_bench_mode(int argc, char **argv)
 	return (0);
 }
 
-void create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
+void	create_bench(t_stack *stack_a, t_stack *stack_b, int argc, char **argv)
 {
-	t_benchmark *bench;
+	t_benchmark	*bench;
 
 	if (!stack_a || !stack_b)
 		return ;
@@ -50,11 +50,11 @@ static void	set_names(t_benchmark *bench, char *strat_name, char *strat_complex)
 	bench->strategy_complexity = strat_complex;
 }
 
-static void	set_adaptive_choice(t_benchmark *bench, char *strategy, char *complexity)
+static void	set_adaptive_choice(t_benchmark *bench, char *strat, char *complex)
 {
 	bench->strategy_name = "adaptive";
-	bench->adaptive_strategy = strategy;
-	bench->strategy_complexity = complexity;
+	bench->adaptive_strategy = strat;
+	bench->strategy_complexity = complex;
 }
 
 void	setup_benchmark(t_stack *s_a, int argc, char **argv)

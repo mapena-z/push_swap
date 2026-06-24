@@ -6,10 +6,15 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 11:30:00 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/23 11:30:00 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:46:12 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+
+	VER SI PUEDE HACERSE CON LAS FUNCIONES AUXILIARES QUE YA TENEMOS
+
+*/
 #include "../../../includes/algorithms.h"
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"

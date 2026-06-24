@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 00:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/06/22 00:00:00 by copilot          ###   ########.fr       */
+/*   Updated: 2026/06/24 17:08:12 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	disorder = compute_disorder(stack_a);
 	if (disorder < 0.2)
-		insertion_sort(stack_a, stack_b);
+		turk_sort(stack_a, stack_b);
 	else if (disorder < 0.5)
 		chunk_sort(stack_a, stack_b);
 	else

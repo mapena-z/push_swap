@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:19 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/16 19:23:25 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:23:43 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,6 @@
 #include "../../../includes/operations.h"
 #include "../../../includes/push_swap.h"
 #include "../../../includes/stack_utils.h"
-
-void	prepare_b_for_push(t_stack *stack_b)
-{
-	int	max_index;
-
-	max_index = stack_max_pos(stack_b);
-	rotate_pos_to_top(stack_b, max_index);
-}
-
-static void	rotate_up(t_stack *stack)
-{
-	if (!stack)
-		return ;
-	if (stack->name == 'b')
-		rb(stack);
-	else
-		ra(stack);
-}
-
-static void	reverse_rotate_down(t_stack *stack)
-{
-	if (!stack)
-		return ;
-	if (stack->name == 'b')
-		rrb(stack);
-	else
-		rra(stack);
-}
 
 void	rotate_pos_to_top(t_stack *stack, int pos)
 {
@@ -88,7 +60,8 @@ void	push_chunk_to_b(t_stack *stack_a, t_stack *stack_b, int start, int end)
 			break ;
 		rotate_pos_to_top(stack_a, pos);
 		pb(stack_a, stack_b);
-		if (stack_b->size > 1 && stack_b->top->index <= start + ((end - start) / 2))
+		if (stack_b->size > 1
+			&& stack_b->top->index <= start + ((end - start) / 2))
 			rb(stack_b);
 	}
 }

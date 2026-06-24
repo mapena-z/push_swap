@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:24 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/23 13:30:00 by copilot          ###   ########.fr       */
+/*   Updated: 2026/06/24 17:40:23 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,70 +23,11 @@ void	alg_two(t_stack *stack)
 		sa(stack);
 }
 
-static void	sort_three_with_offset(t_stack *a, int offset)
-{
-	int	first;
-	int	second;
-	int	third;
-
-	first = a->top->index - offset;
-	second = a->top->next->index - offset;
-	third = a->bot->index - offset;
-	if (first == 0 && second == 2 && third == 1)
-	{
-		sa(a);
-		ra(a);
-	}
-	else if (first == 1 && second == 0 && third == 2)
-		sa(a);
-	else if (first == 1 && second == 2 && third == 0)
-		rra(a);
-	else if (first == 2 && second == 0 && third == 1)
-		ra(a);
-	else if (first == 2 && second == 1 && third == 0)
-	{
-		sa(a);
-		rra(a);
-	}
-}
-
 void	alg_three(t_stack *a)
 {
 	if (!a || a->size != 3)
 		return ;
 	sort_three_with_offset(a, 0);
-}
-
-void	bring_index_to_top(t_stack *a, int target)
-{
-	int	pos;
-	int	moves;
-	int	count;
-
-	pos = stack_find_index(a, target);
-	if (!a || pos < 0)
-		return ;
-	if (pos == 0)
-		return ;
-	if (pos <= a->size / 2)
-	{
-		count = 0;
-		while (count < pos)
-		{
-			ra(a);
-			count++;
-		}
-	}
-	else
-	{
-		moves = a->size - pos;
-		count = 0;
-		while (count < moves)
-		{
-			rra(a);
-			count++;
-		}
-	}
 }
 
 void	alg_four(t_stack *a, t_stack *b)

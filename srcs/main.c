@@ -21,11 +21,6 @@ static void	run_selected_sort(t_stack *stack_a, t_stack *stack_b, int argc, char
 {
 	if (compute_disorder(stack_a) == 0)
 		return ;
-	if (has_flag(argc, argv, "--simple"))
-	{
-		turk_sort(stack_a, stack_b);
-		return ;
-	}
 	if (stack_a->size == 2)
 	{
 		alg_two(stack_a);
@@ -46,7 +41,9 @@ static void	run_selected_sort(t_stack *stack_a, t_stack *stack_b, int argc, char
 		alg_five(stack_a, stack_b);
 		return ;
 	}
-	if (has_flag(argc, argv, "--medium"))
+	if (has_flag(argc, argv, "--simple"))
+		turk_sort(stack_a, stack_b);
+	else if (has_flag(argc, argv, "--medium"))
 		chunk_sort(stack_a, stack_b);
 	else if (has_flag(argc, argv, "--complex"))
 		radix(stack_a, stack_b);
