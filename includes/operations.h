@@ -1,14 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/24 18:23:59 by carlinaq          #+#    #+#             */
+/*   Updated: 2026/06/24 18:24:12 by carlinaq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef OPERATIONS_H
 # define OPERATIONS_H
 
-#include "push_swap.h"
-
-void print_mov(t_stack *stack, char mov);
-/* Stack operations */
-//void	push(t_stack *stack_out, t_stack *stack_in);
-//void	swap(t_stack *stack);
-//void	rotate(t_stack *stack);
-//void	reverse_rotate(t_stack *stack);
+# include "push_swap.h"
 
 /* Operations with output */
 void	pa(t_stack *out, t_stack *in);
