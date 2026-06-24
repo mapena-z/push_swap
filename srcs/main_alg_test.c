@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 15:57:53 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 18:16:47 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	main(void)
 	radix(stack_a, stack_b);
 	stack_print(stack_a);
 	/* ------------------------------- */
-	stack_free(stack_a);
-	stack_free(stack_b);
+	free(stack_a);
+	free(stack_b);
 	return (0);
 }

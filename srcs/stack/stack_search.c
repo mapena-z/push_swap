@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:41:52 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/14 18:01:22 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/24 18:18:19 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* Devuelve el nodo que ocupa la posicion dada dentro de la pila. */
 t_node	*stack_get_at(t_stack *stack, int index)
 {
-	t_node *node;
-	int i;
+	t_node	*node;
+	int		i;
 
 	if (!stack || index < 0 || index >= stack->size)
 		return (NULL);
@@ -33,10 +33,10 @@ t_node	*stack_get_at(t_stack *stack, int index)
 /* Busca la posicion del nodo con el indice mas pequeno de la pila. */
 int	stack_min_pos(t_stack *stack)
 {
-	t_node *node;
-	int min_index;
-	int min_pos;
-	int pos;
+	t_node	*node;
+	int		min_index;
+	int		min_pos;
+	int		pos;
 
 	if (!stack || stack->size == 0)
 		return (-1);
@@ -60,10 +60,10 @@ int	stack_min_pos(t_stack *stack)
 /* Busca la posicion del nodo con el indice mas grande de la pila. */
 int	stack_max_pos(t_stack *stack)
 {
-	t_node *node;
-	int max_index;
-	int max_pos;
-	int pos;
+	t_node	*node;
+	int		max_index;
+	int		max_pos;
+	int		pos;
 
 	if (!stack || stack->size == 0)
 		return (-1);
@@ -87,8 +87,8 @@ int	stack_max_pos(t_stack *stack)
 /* Devuelve la posicion del primer nodo cuyo indice coincide con el buscado. */
 int	stack_find_index(t_stack *stack, int index)
 {
-	t_node *node;
-	int pos;
+	t_node	*node;
+	int		pos;
 
 	if (!stack || stack->size == 0)
 		return (-1);

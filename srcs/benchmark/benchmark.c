@@ -5,17 +5,16 @@
 
 void	bench_putdisorder_fd(double disorder, int fd)
 {
-    int disorder_100;
+	int	disorder_100;
 
-    disorder_100 = (int)(disorder * 100 + 0.5);
-    
-    if (disorder_100 >= 100)
-    {
-        ft_putstr_fd("100.00%", fd);
-        return ;
-    }
-    ft_putnbr_fd(disorder_100, fd);
-    ft_putstr_fd(".00%", fd);
+	disorder_100 = (int)(disorder * 100 + 0.5);
+	if (disorder_100 >= 100)
+	{
+		ft_putstr_fd("100.00%", fd);
+		return;
+	}
+	ft_putnbr_fd(disorder_100, fd);
+	ft_putstr_fd(".00%", fd);
 }
 
 void	bench_putlabelnbr_fd(const char *label, int number, int fd)
@@ -38,17 +37,10 @@ t_benchmark	*bench_new(void)
 	return (bench);
 }
 
-void	bench_free(t_benchmark *bench)
+void bench_print(t_benchmark *bench)
 {
 	if (!bench)
-		return ;
-	free(bench);
-}
-
-void	bench_print(t_benchmark *bench)
-{
-	if (!bench)
-		return ;
+		return;
 	ft_putstr_fd("[bench] disorder: ", 2);
 	bench_putdisorder_fd(bench->disorder, 2);
 	ft_putchar_fd('\n', 2);

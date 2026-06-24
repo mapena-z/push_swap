@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:57:11 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/23 11:22:59 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/24 18:08:44 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 	{
 		if (stack_a->bench)
 			bench_print(stack_a->bench);
-		return (bench_free(stack_a->bench), stack_free(stack_a, stack_b), 0);
+		return (free(stack_a->bench), stack_free(stack_a, stack_b), 0);
 	}
 	set_fd(stack_a, stack_b);
 	
@@ -85,5 +85,5 @@ int	main(int argc, char **argv)
 	run_selected_sort(stack_a, stack_b, argc, argv);
 	bench_print(stack_a->bench);
 	//stack_print(stack_a); //
-	return (bench_free(stack_a->bench), stack_free(stack_a, stack_b), 0);
+	return (free(stack_a->bench), stack_free(stack_a, stack_b), 0);
 }

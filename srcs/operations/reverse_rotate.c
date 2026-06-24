@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/24 18:12:08 by carlinaq          #+#    #+#             */
+/*   Updated: 2026/06/24 18:12:49 by carlinaq         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 #include "../../includes/operations.h"
 #include "../../includes/benchmark.h"
 
-static void reverse_rotate(t_stack *stack)
+static void	reverse_rotate(t_stack *stack)
 {
-	t_node *old_bot;
-	t_node *new_bot;
+	t_node	*old_bot;
+	t_node	*new_bot;
 
 	if (!stack || stack->size <= 1)
-		return;
+		return ;
 	new_bot = stack->top;
 	while (new_bot->next != stack->bot)
 		new_bot = new_bot->next;
@@ -19,12 +31,11 @@ static void reverse_rotate(t_stack *stack)
 	stack->top = old_bot;
 }
 
-void rra(t_stack *a)
+void	rra(t_stack *a)
 {
 	reverse_rotate(a);
 	if (a->fd != -1)
 		ft_putstr_fd("rra\n", a->fd);
-	//bench_count_rra(a->bench);
 	if (a->bench)
 	{
 		a->bench->ops.n_rra++;
@@ -32,12 +43,11 @@ void rra(t_stack *a)
 	}
 }
 
-void rrb(t_stack *b)
+void	rrb(t_stack *b)
 {
 	reverse_rotate(b);
 	if (b->fd != -1)
 		ft_putstr_fd("rrb\n", b->fd);
-	//bench_count_rrb(b->bench);
 	if (b->bench)
 	{
 		b->bench->ops.n_rrb++;
@@ -45,13 +55,12 @@ void rrb(t_stack *b)
 	}
 }
 
-void rrr(t_stack *a, t_stack *b)
+void	rrr(t_stack *a, t_stack *b)
 {
 	reverse_rotate(a);
 	reverse_rotate(b);
 	if (a->fd != -1)
 		ft_putstr_fd("rrr\n", a->fd);
-	//bench_count_rrr(a->bench);
 	if (a->bench)
 	{
 		a->bench->ops.n_rrr++;
