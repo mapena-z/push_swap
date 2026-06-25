@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 18:13:07 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 18:13:48 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/25 11:16:52 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	rotate(t_stack *stack)
 	t_node	*new_top;
 
 	if (!stack || stack->size <= 1)
-		return;
+		return ;
 	old_top = stack->top;
 	new_top = old_top->next;
 	old_top->next = NULL;

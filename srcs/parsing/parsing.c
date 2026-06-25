@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/21 21:32:36 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/25 11:07:05 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
+#include "../../includes/stack_utils.h"
+#include "../../includes/benchmark.h"
 
 void	stack_index(t_stack *stack)
 {
@@ -85,6 +87,31 @@ int	parse_arguments(int argc, char **argv, int i, t_stack *stack)
 			return (1);
 		}
 		i++;
+	}
+	return (0);
+}
+
+int	init_and_parse(t_stack **s_a, t_stack **s_b, int argc, char **argv)
+{
+	int	start_idx;
+
+	start_idx = first_value_arg(argc, argv);
+	if (start_idx == argc)
+		return (1);
+	*s_a = stack_new('a');
+	*s_b = stack_new('b');
+	if (!*s_a || !*s_b || parse_arguments(argc, argv, start_idx, *s_a) == 1)
+	{
+		stack_free(*s_a, *s_b);
+		return (1);
+	}
+	stack_index(*s_a);
+	if (is_bench_mode(argc, argv))
+		create_bench(*s_a, *s_b, argc, argv);
+	if (is_bench_mode(argc, argv) && !(*s_a)->bench)
+	{
+		stack_free(*s_a, *s_b);
+		return (1);
 	}
 	return (0);
 }

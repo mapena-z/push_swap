@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_carl_propuesta.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 10:29:07 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/21 20:03:26 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/25 10:23:53 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

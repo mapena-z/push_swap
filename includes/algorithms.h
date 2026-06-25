@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithms.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 18:21:46 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 18:22:56 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/25 11:00:31 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ void	radix(t_stack *stack_a, t_stack *stack_b);
 /* adaptive */
 double	compute_disorder(t_stack *stack);
 void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
+
+/*select algorithms*/
+void	run_method(t_stack *stack_a, t_stack *stack_b, int argc, char **argv);
+void	run_small_case(t_stack *stack_a, t_stack *stack_b);
+
 #endif

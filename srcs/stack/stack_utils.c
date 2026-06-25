@@ -6,13 +6,13 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:41:55 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 11:28:33 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/25 11:16:31 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void set_fd(t_stack *stack_a, t_stack *stack_b)
+void	set_fd(t_stack *stack_a, t_stack *stack_b)
 {
 	stack_a->fd = 1;
 	stack_b->fd = 1;
@@ -20,11 +20,11 @@ void set_fd(t_stack *stack_a, t_stack *stack_b)
 
 t_stack	*stack_new(char name)
 {
-	t_stack *stack;
+	t_stack	*stack;
 
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
-		return(NULL);
+		return (NULL);
 	stack->name = name;
 	stack->top = NULL;
 	stack->bot = NULL;
@@ -32,10 +32,11 @@ t_stack	*stack_new(char name)
 	stack->bench = NULL;
 	return (stack);
 }
+
 void	stack_clear(t_stack *stack)
 {
-	t_node *node;
-	t_node *node_aux;
+	t_node	*node;
+	t_node	*node_aux;
 
 	if (!stack)
 		return ;
@@ -50,6 +51,7 @@ void	stack_clear(t_stack *stack)
 	stack->bot = NULL;
 	stack->size = 0;
 }
+
 void	stack_free(t_stack *stack_a, t_stack *stack_b)
 {
 	if (stack_a)
