@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/26 12:10:00 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/26 12:10:00 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/27 23:44:50 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,39 @@ t_move	find_cheapest(t_stack *stack_a, t_stack *stack_b)
 ** in the same direction, then finishes individually.
 ** This is the core move-saving optimization.
 */
+
+static void	rotate_stack(t_stack *stack, int count, int forward)
+{
+	while (count-- > 0)
+	{
+		if (forward)
+			ra(stack);
+		else
+			rra(stack);
+	}
+}
+
+static void	rotate_stack_b(t_stack *stack, int count, int forward)
+{
+	while (count-- > 0)
+	{
+		if (forward)
+			rb(stack);
+		else
+			rrb(stack);
+	}
+}
+
+// static void rr_pos(t_stack *a, t_stack *b, int *pos_a, int *pos_b)
+// {
+// 		while (*pos_a > 0 && *pos_b > 0)
+// 		{
+// 			rr(a, b);
+// 			(*pos_a)--;
+// 			(*pos_b)--;
+// 		}
+// }
+
 void	rotate_both_to_top(t_stack *stack_a, t_stack *stack_b,
 			int pos_a, int pos_b)
 {
@@ -157,10 +190,15 @@ void	rotate_both_to_top(t_stack *stack_a, t_stack *stack_b,
 
 	fwd_a = (pos_a <= stack_a->size / 2);
 	fwd_b = (pos_b <= stack_b->size / 2);
+	if (!fwd_a)
+		pos_a = stack_a->size - pos_a;
+	if (!fwd_b)
+		pos_b = stack_b->size - pos_b;
 	if (fwd_a && fwd_b)
 	{
 		while (pos_a > 0 && pos_b > 0)
 		{
+			//rr_pos(stack_a, stack_b, &pos_a, &pos_b);
 			rr(stack_a, stack_b);
 			pos_a--;
 			pos_b--;
@@ -168,8 +206,6 @@ void	rotate_both_to_top(t_stack *stack_a, t_stack *stack_b,
 	}
 	else if (!fwd_a && !fwd_b)
 	{
-		pos_a = stack_a->size - pos_a;
-		pos_b = stack_b->size - pos_b;
 		while (pos_a > 0 && pos_b > 0)
 		{
 			rrr(stack_a, stack_b);
@@ -177,29 +213,6 @@ void	rotate_both_to_top(t_stack *stack_a, t_stack *stack_b,
 			pos_b--;
 		}
 	}
-	else
-	{
-		if (fwd_a)
-			pos_a = pos_a;
-		else
-			pos_a = stack_a->size - pos_a;
-		if (fwd_b)
-			pos_b = pos_b;
-		else
-			pos_b = stack_b->size - pos_b;
-	}
-	/* Finish remaining individual rotations for A */
-	if (fwd_a)
-		while (pos_a-- > 0)
-			ra(stack_a);
-	else
-		while (pos_a-- > 0)
-			rra(stack_a);
-	/* Finish remaining individual rotations for B */
-	if (fwd_b)
-		while (pos_b-- > 0)
-			rb(stack_b);
-	else
-		while (pos_b-- > 0)
-			rrb(stack_b);
+	rotate_stack(stack_a, pos_a, fwd_a);
+	rotate_stack_b(stack_b, pos_b, fwd_b);
 }

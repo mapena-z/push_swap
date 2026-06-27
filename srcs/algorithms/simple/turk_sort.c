@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 11:30:00 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/26 12:00:00 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/27 23:45:27 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,16 @@ void	turk_sort(t_stack *stack_a, t_stack *stack_b)
 
 	if (!stack_a || !stack_b || stack_a->size <= 1)
 		return ;
-	if (stack_a->size == 2)
-	{
-		alg_two(stack_a);
-		return ;
-	}
-	if (stack_a->size == 3)
-	{
-		alg_three(stack_a);
-		return ;
-	}
+	// if (stack_a->size == 2)
+	// {
+	// 	alg_two(stack_a);
+	// 	return ;
+	// }
+	// if (stack_a->size == 3)
+	// {
+	// 	alg_three(stack_a);
+	// 	return ;
+	// }
 	/* Bootstrap: 2 elementos en B para que find_insert_pos_b tenga referencia */
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
