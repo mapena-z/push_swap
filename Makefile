@@ -56,12 +56,6 @@ INCLUDES       = -Iincludes -Ilibft -Ilibft/ft_printf -Ibonus
 RM             = rm -f
 
 TOTAL_OBJ      = $(words $(OBJ_MANDATORY))
-IS_CHECKER     = 0
-
-ifeq ($(MAKECMDGOALS),checker)
-    TOTAL_OBJ  = $(words $(OBJ_CHECKER))
-    IS_CHECKER = 1
-endif
 
 all: $(NAME)
 
@@ -72,39 +66,27 @@ $(NAME): $(LIBFT) $(OBJ_MANDATORY)
 
 checker: $(LIBFT) $(OBJ_CHECKER)
 	@$(CC) $(CFLAGS) $(OBJ_CHECKER) $(LIBFT) -o $(CHECKER_NAME)
-	@echo ""
 	@echo "$(GREEN)checker compilation completed!$(NC)"
 
 $(LIBFT):
 	@$(MAKE) -s --no-print-directory -C $(LIBFT_DIR)
 
-%.o: %.c
-	@$(eval COMPLETED = $(shell find srcs bonus -name "*.o" 2>/dev/null | wc -l))
+srcs/%.o: srcs/%.c
+	@$(eval COMPLETED = $(shell find srcs -name "*.o" 2>/dev/null | wc -l))
 	@if [ $(COMPLETED) -eq 0 ]; then \
 		echo "$(CYAN)"; \
-		if [ $(IS_CHECKER) -eq 1 ]; then \
-			echo "   ____ _   _ _____ ____ _  _______ ____  "; \
-			echo "  / ___| | | | ____/ ___| |/ / ____|  _ \ "; \
-			echo " | |   | |_| |  _|| |   | ' /|  _| | |_) |"; \
-			echo " | |___|  _  | |__| |___| . \| |___|  _ < "; \
-			echo "  \____|_| |_|_____\____|_|\_\_____|_| \_\\"; \
-		else \
-			echo "  ____  _   _ ____  _   _   ======        ___    ____  "; \
-			echo " |  _ \| | | / ___|| | | | / ___\ \      / / \  |  _ \ "; \
-			echo " | |_) | | | \___ \| |_| | \___  \ \ /\ / / _ \ | |_) |"; \
-			echo " |  __/| |_| |___) |  _  |  ___) |\ V  V / ___ \|  __/ "; \
-			echo " |_|    \___/|____/|_| |_| |____/  \_/\_/_/   \_\_|    "; \
-		fi; \
-		echo "                                                       "; \
+		echo "   ____  _   _ ____  _   _   ======        ___    ____  "; \
+		echo "  |  _ \| | | / ___|| | | | / ___\ \      / / \  |  _ \ "; \
+		echo "  | |_) | | | \___ \| |_| | \___  \ \ /\ / / _ \ | |_) |"; \
+		echo "  |  __/| |_| |___) |  _  |  ___) |\ V  V / ___ \|  __/ "; \
+		echo "  |_|    \___/|____/|_| |_| |____/  \_/\_/_/   \_\_|    "; \
+		echo " "; \
 		echo "        $(WHITE)By: mapena-z & carlinaq-$(CYAN)                "; \
 		echo "$(NC)"; \
 	fi
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@$(MAKE) -s progress
-
-progress:
 	@( \
-	COMP_SRCS=$$(find srcs bonus -name "*.o" 2>/dev/null | wc -l); \
+	COMP_SRCS=$$(find srcs -name "*.o" 2>/dev/null | wc -l); \
 	if [ $(TOTAL_OBJ) -gt 0 ]; then \
 		PERCENTAGE=$$(echo "scale=2; 100 * $$COMP_SRCS / $(TOTAL_OBJ)" | bc); \
 		BAR_LENGTH=50; \
@@ -116,6 +98,9 @@ progress:
 	fi \
 	)
 	@sleep 0.01
+
+bonus/%.o: bonus/%.c
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
 	@$(RM) $(OBJ_MANDATORY) $(OBJ_CHECKER)
@@ -130,4 +115,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all checker clean fclean re progress
+.PHONY: all clean fclean re
