@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 11:30:00 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/27 23:45:27 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/28 17:38:55 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 #include "../../../includes/operations.h"
 #include "../../../includes/stack_utils.h"
 #include "../../../includes/push_swap.h"
-
-/* Prototypes for Turk helpers defined in turk_sort_utils.c */
-int		moves_to_top(t_stack *stack, int pos);
-int		compute_cost(t_stack *a, t_stack *b, int pos_a, int pos_b);
-int		find_insert_pos_b(t_stack *b, int target_index);
-t_move	find_cheapest(t_stack *a, t_stack *b);
-void	rotate_both_to_top(t_stack *a, t_stack *b, int pos_a, int pos_b);
-
-/* -------------------------------------------------------------------------- */
-/*  PHASE 2 — RESTORE B → A                                                   */
-/* -------------------------------------------------------------------------- */
 
 /*
 ** Brings the largest element of B to the top using the shortest path
@@ -43,10 +32,6 @@ static void	restore_b_to_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-/* -------------------------------------------------------------------------- */
-/*  FINAL ROTATION — align sorted A                                            */
-/* -------------------------------------------------------------------------- */
-
 /*
 ** After restoring B→A, rotate so that the overall minimum (index 0)
 ** is on top. Uses the shared bring_index_to_top helper.
@@ -57,10 +42,6 @@ static void	rotate_min_to_top_a(t_stack *stack_a)
 		return ;
 	bring_index_to_top(stack_a, 0);
 }
-
-/* -------------------------------------------------------------------------- */
-/*  ENTRY POINT                                                                */
-/* -------------------------------------------------------------------------- */
 
 /*
 ** Turk Algorithm for push_swap — targets < 5500 moves for 500 elements.
@@ -81,27 +62,14 @@ void	turk_sort(t_stack *stack_a, t_stack *stack_b)
 
 	if (!stack_a || !stack_b || stack_a->size <= 1)
 		return ;
-	// if (stack_a->size == 2)
-	// {
-	// 	alg_two(stack_a);
-	// 	return ;
-	// }
-	// if (stack_a->size == 3)
-	// {
-	// 	alg_three(stack_a);
-	// 	return ;
-	// }
-	/* Bootstrap: 2 elementos en B para que find_insert_pos_b tenga referencia */
 	pb(stack_a, stack_b);
 	pb(stack_a, stack_b);
-	/* Vaciar A completamente en B manteniendo B en orden descendente circular */
 	while (stack_a->size > 0)
 	{
 		best = find_cheapest(stack_a, stack_b);
 		rotate_both_to_top(stack_a, stack_b, best.pos_a, best.pos_b);
 		pb(stack_a, stack_b);
 	}
-	/* B está en orden descendente circular → al sacar el max cada vez, A queda ascendente */
 	restore_b_to_a(stack_a, stack_b);
 	rotate_min_to_top_a(stack_a);
 }

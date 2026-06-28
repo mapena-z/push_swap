@@ -13,6 +13,7 @@ WHITE   = \033[1;37m
 
 SRC_ALGORITHMS = srcs/algorithms/simple/turk_sort_utils.c \
                  srcs/algorithms/simple/turk_sort.c \
+				 srcs/algorithms/simple/turk_sort_aux.c \
                  srcs/algorithms/adaptive/adaptive.c \
                  srcs/algorithms/adaptive/disorder.c \
                  srcs/algorithms/complex/radix.c \
