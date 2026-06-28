@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   adaptive.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 00:00:00 by copilot           #+#    #+#             */
-/*   Updated: 2026/06/24 17:08:12 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/28 11:18:08 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/algorithms.h"
+#include "../../../includes/algorithms.h"
 
 void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
 {
