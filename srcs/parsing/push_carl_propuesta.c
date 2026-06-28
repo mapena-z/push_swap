@@ -6,19 +6,12 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 10:29:07 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/25 10:23:53 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/28 13:38:01 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include "../../includes/stack_utils.h"
-
-// void	free_stacks(t_stack *stack)
-// {
-// 	if (!stack)
-// 		return ;
-// 	stack_free(stack);
-// }
 
 void	free_words(char **words)
 {

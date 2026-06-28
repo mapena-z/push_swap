@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/25 11:07:05 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/28 15:08:26 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	init_and_parse(t_stack **s_a, t_stack **s_b, int argc, char **argv)
 {
 	int	start_idx;
 
+	if (validate_flags(argc, argv))
+		return (1);
 	start_idx = first_value_arg(argc, argv);
 	if (start_idx == argc)
 		return (1);
