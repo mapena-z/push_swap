@@ -32,7 +32,7 @@ int	is_number(const char *str)
 
 int	check_long(long value)
 {
-	if (value < -2147483648 || value > 2147483647)
+	if (value < INT_MIN || value > INT_MAX)
 		return (0);
 	return (1);
 }
@@ -42,6 +42,7 @@ long	ft_atol(const char *nptr)
 	int		i;
 	long	result;
 	int		sign;
+	int		digit;
 
 	i = 0;
 	result = 0;
@@ -49,38 +50,16 @@ long	ft_atol(const char *nptr)
 	while (nptr[i] == '\t' || nptr[i] == ' ' || nptr[i] == '\n'
 		|| nptr[i] == '\r' || nptr[i] == '\v' || nptr[i] == '\f')
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign = -sign;
+	if (nptr[i] == '+' || nptr[i] == '-')
+		sign = 1 - 2 * (nptr[i] == '-');
+	if (nptr[i] == '+' || nptr[i] == '-')
 		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result * 10 + (nptr[i] - '0');
-		i++;
+		digit = nptr[i++] - '0';
+		if (result > (LONG_MAX - digit) / 10)
+			return (LONG_MAX);
+		result = result * 10 + digit;
 	}
 	return (result * sign);
-}
-
-int	is_duplicate(t_stack *stack)
-{
-	t_node	*current;
-	t_node	*temp;
-
-	if (!stack || !stack->top)
-		return (0);
-	current = stack->top;
-	while (current)
-	{
-		temp = current->next;
-		while (temp)
-		{
-			if (current->value == temp->value)
-				return (1);
-			temp = temp->next;
-		}
-		current = current->next;
-	}
-	return (0);
 }

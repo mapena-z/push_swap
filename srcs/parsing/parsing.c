@@ -14,6 +14,13 @@
 #include "../../includes/stack_utils.h"
 #include "../../includes/benchmark.h"
 
+int	check_flags(char *arg)
+{
+	if (!arg)
+		return (0);
+	return (is_algo_flag(arg) || is_extra_flag(arg));
+}
+
 void	stack_index(t_stack *stack)
 {
 	t_node	*current;
@@ -38,19 +45,6 @@ void	stack_index(t_stack *stack)
 	}
 }
 
-int	check_flags(char *arg)
-{
-	if (!arg)
-		return (0);
-	if (ft_strncmp(arg, "--simple", 9) == 0 || ft_strncmp(arg, "--medium",
-			9) == 0 || ft_strncmp(arg, "--complex", 10) == 0 || ft_strncmp(arg,
-			"--adaptive", 11) == 0 || ft_strncmp(arg, "--bench", 8) == 0)
-	{
-		return (1);
-	}
-	return (0);
-}
-
 int	check_split(char *argv, t_stack *stack)
 {
 	char	**numbers;
@@ -68,8 +62,7 @@ int	check_split(char *argv, t_stack *stack)
 		value = ft_atol(numbers[i]);
 		if (!check_long(value) || !is_number(numbers[i]))
 			return (free_words(numbers), 1);
-		ft_push(stack, value);
-		if (is_duplicate(stack))
+		if (ft_push(stack, value) || is_duplicate(stack))
 			return (free_words(numbers), 1);
 		i++;
 	}
@@ -99,7 +92,7 @@ int	init_and_parse(t_stack **s_a, t_stack **s_b, int argc, char **argv)
 		return (1);
 	start_idx = first_value_arg(argc, argv);
 	if (start_idx == argc)
-		return (1);
+		return (write(2, "Error\n", 6), 1);
 	*s_a = stack_new('a');
 	*s_b = stack_new('b');
 	if (!*s_a || !*s_b || parse_arguments(argc, argv, start_idx, *s_a) == 1)

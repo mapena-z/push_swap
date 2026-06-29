@@ -29,6 +29,7 @@ t_stack	*stack_new(char name)
 	stack->top = NULL;
 	stack->bot = NULL;
 	stack->size = 0;
+	stack->fd = 1;
 	stack->bench = NULL;
 	return (stack);
 }
@@ -54,6 +55,13 @@ void	stack_clear(t_stack *stack)
 
 void	stack_free(t_stack *stack_a, t_stack *stack_b)
 {
+	if (stack_a && stack_a->bench)
+	{
+		free(stack_a->bench);
+		stack_a->bench = NULL;
+		if (stack_b)
+			stack_b->bench = NULL;
+	}
 	if (stack_a)
 	{
 		stack_clear(stack_a);

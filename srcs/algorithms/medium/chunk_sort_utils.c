@@ -41,14 +41,6 @@ int	stack_has_index_in_range(t_stack *stack, int start, int end)
 	return (0);
 }
 
-void	prepare_b_for_push(t_stack *stack_b)
-{
-	int	max_index;
-
-	max_index = stack_max_pos(stack_b);
-	rotate_pos_to_top(stack_b, max_index);
-}
-
 void	rotate_up(t_stack *stack)
 {
 	if (!stack)

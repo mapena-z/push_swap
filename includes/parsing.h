@@ -15,6 +15,8 @@
 
 # include "push_swap.h"
 
+int		is_algo_flag(char *arg);
+int		is_extra_flag(char *arg);
 int		check_flags(char *arg);
 int		check_split(char *argv, t_stack *stack);
 int		parse_arguments(int argc, char **argv, int i, t_stack *stack);
@@ -22,7 +24,7 @@ int		is_number(const char *str);
 int		check_long(long value);
 long	ft_atol(const char *nptr);
 void	free_words(char **words);
-void	ft_push(t_stack *stack, int value);
+int		ft_push(t_stack *stack, int value);
 int		is_duplicate(t_stack *stack);
 void	stack_index(t_stack *stack);
 int		has_flag(int argc, char **argv, char *flag);

@@ -77,25 +77,6 @@ void	push_back_best_element(t_stack *stack_a, t_stack *stack_b)
 	pa(stack_a, stack_b);
 }
 
-int	ft_pos_of_index(t_stack *s, int target)
-{
-	t_node	*n;
-	int		i;
-
-	if (!s || s->size == 0)
-		return (-1);
-	n = s->top;
-	i = 0;
-	while (i < s->size)
-	{
-		if (n->index == target)
-			return (i);
-		n = n->next;
-		i++;
-	}
-	return (-1);
-}
-
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int	chunk_size;

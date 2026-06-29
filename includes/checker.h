@@ -17,6 +17,8 @@
 # include "operations.h"
 # include "stack_utils.h"
 
+int		init_checker(t_stack **stack_a, t_stack **stack_b,
+			int argc, char **argv);
 void	read_input(t_stack *stack_a, t_stack *stack_b, char *line);
 void	final_check(t_stack *stack_a, t_stack *stack_b);
 void	checker_error(t_stack *stack_a, t_stack *stack_b, char *line);

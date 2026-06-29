@@ -11,6 +11,28 @@
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
+#include "../includes/parsing.h"
+
+int	init_checker(t_stack **stack_a, t_stack **stack_b,
+		int argc, char **argv)
+{
+	int	start_idx;
+
+	if (validate_flags(argc, argv))
+		return (1);
+	*stack_a = stack_new('a');
+	(*stack_a)->fd = -1;
+	*stack_b = stack_new('b');
+	(*stack_b)->fd = -1;
+	if (!*stack_a || !*stack_b)
+		return (stack_free(*stack_a, *stack_b), 1);
+	start_idx = first_value_arg(argc, argv);
+	if (start_idx == argc)
+		return (write(2, "Error\n", 6), stack_free(*stack_a, *stack_b), 1);
+	if (parse_arguments(argc, argv, start_idx, *stack_a) == 1)
+		return (stack_free(*stack_a, *stack_b), 1);
+	return (0);
+}
 
 void	checker_error(t_stack *stack_a, t_stack *stack_b, char *line)
 {

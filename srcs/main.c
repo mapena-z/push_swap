@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 	set_fd(stack_a, stack_b);
 	run_method(stack_a, stack_b, argc, argv);
 	bench_print(stack_a->bench);
-	free(stack_a->bench);
 	stack_free(stack_a, stack_b);
 	return (0);
 }

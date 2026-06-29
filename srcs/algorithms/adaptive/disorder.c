@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/push_swap.h"
 
 double	compute_disorder(t_stack *stack)
 {

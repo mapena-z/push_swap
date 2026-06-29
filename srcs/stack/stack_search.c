@@ -103,22 +103,3 @@ int	stack_find_index(t_stack *stack, int index)
 	}
 	return (-1);
 }
-
-t_node	*stack_find_pos(t_stack *stack, int n)
-{
-	t_node	*node;
-	int		i;
-
-	if (!stack || stack->size == 0 || n < 0)
-		return (NULL);
-	node = stack->top;
-	i = 0;
-	while (node)
-	{
-		if (i == n)
-			return (node);
-		node = node->next;
-		i++;
-	}
-	return (NULL);
-}

@@ -28,14 +28,37 @@ void	free_words(char **words)
 	free(words);
 }
 
-void	ft_push(t_stack *stack, int value)
+int	ft_push(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
 	if (!stack)
-		return ;
+		return (1);
 	new_node = node_new(value, 0);
 	if (!new_node)
-		return ;
+		return (1);
 	stack_add_back(stack, new_node);
+	return (0);
+}
+
+int	is_duplicate(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*temp;
+
+	if (!stack || !stack->top)
+		return (0);
+	current = stack->top;
+	while (current)
+	{
+		temp = current->next;
+		while (temp)
+		{
+			if (current->value == temp->value)
+				return (1);
+			temp = temp->next;
+		}
+		current = current->next;
+	}
+	return (0);
 }
