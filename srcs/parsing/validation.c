@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 12:02:37 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/16 22:45:01 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/29 20:40:34 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_number(const char *str)
 
 int	check_long(long value)
 {
-	if (value < -2147483648 || value > 2147483647)
+	if (value < INT_MIN || value > INT_MAX)
 		return (0);
 	return (1);
 }

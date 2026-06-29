@@ -6,11 +6,12 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 17:08:16 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 17:15:49 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/29 20:39:37 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../../../includes/algorithms.h"
+#include "../../../includes/push_swap.h"
 
 double	compute_disorder(t_stack *stack)
 {

@@ -6,13 +6,12 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:41:52 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 18:18:19 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/29 20:38:53 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-/* Devuelve el nodo que ocupa la posicion dada dentro de la pila. */
 t_node	*stack_get_at(t_stack *stack, int index)
 {
 	t_node	*node;
@@ -30,7 +29,6 @@ t_node	*stack_get_at(t_stack *stack, int index)
 	return (node);
 }
 
-/* Busca la posicion del nodo con el indice mas pequeno de la pila. */
 int	stack_min_pos(t_stack *stack)
 {
 	t_node	*node;
@@ -57,7 +55,6 @@ int	stack_min_pos(t_stack *stack)
 	return (min_pos);
 }
 
-/* Busca la posicion del nodo con el indice mas grande de la pila. */
 int	stack_max_pos(t_stack *stack)
 {
 	t_node	*node;
@@ -84,7 +81,6 @@ int	stack_max_pos(t_stack *stack)
 	return (max_pos);
 }
 
-/* Devuelve la posicion del primer nodo cuyo indice coincide con el buscado. */
 int	stack_find_index(t_stack *stack, int index)
 {
 	t_node	*node;
