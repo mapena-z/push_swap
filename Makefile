@@ -30,7 +30,7 @@ SRC_OPERATIONS = srcs/operations/push.c \
 
 SRC_PARSING    = srcs/parsing/parsing_utils.c \
                  srcs/parsing/parsing.c \
-                 srcs/parsing/push_carl_propuesta.c \
+                 srcs/parsing/push_parsing.c \
                  srcs/parsing/validation.c
 
 SRC_STACK      = srcs/stack/stack_search.c \
