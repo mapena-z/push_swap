@@ -37,6 +37,8 @@ void	rotate_both_to_top(t_stack *a, t_stack *b, int pos_a, int pos_b);
 
 /* Medium algorithm -> Chunk Sort */
 void	chunk_sort(t_stack *stack_a, t_stack *stack_b);
+void	chunk_sort_sized(t_stack *stack_a, t_stack *stack_b, int chunk_size);
+t_move	find_cheapest_in_range(t_stack *a, t_stack *b, int start, int end);
 int		ft_sqrt(int nb);
 void	rotate_up(t_stack *stack);
 void	reverse_rotate_down(t_stack *stack);

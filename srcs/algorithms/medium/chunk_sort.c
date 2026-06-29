@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:19 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 17:23:43 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/29 18:00:00 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,64 +40,58 @@ void	rotate_pos_to_top(t_stack *stack, int pos)
 	}
 }
 
-void	push_chunk_to_b(t_stack *stack_a, t_stack *stack_b, int start, int end)
+static void	push_chunk_cheapest(t_stack *a, t_stack *b, int start, int end)
 {
-	int		pos;
-	t_node	*node;
+	t_move	best;
 
-	if (!stack_a || !stack_b)
-		return ;
-	while (stack_has_index_in_range(stack_a, start, end) == 1)
+	while (stack_has_index_in_range(a, start, end))
 	{
-		node = stack_a->top;
-		pos = 0;
-		while (node && !(node->index >= start && node->index <= end))
-		{
-			node = node->next;
-			pos++;
-		}
-		if (!node)
-			break ;
-		rotate_pos_to_top(stack_a, pos);
-		pb(stack_a, stack_b);
-		if (stack_b->size > 1
-			&& stack_b->top->index <= start + ((end - start) / 2))
-			rb(stack_b);
+		best = find_cheapest_in_range(a, b, start, end);
+		rotate_both_to_top(a, b, best.pos_a, best.pos_b);
+		pb(a, b);
 	}
 }
 
-void	push_back_best_element(t_stack *stack_a, t_stack *stack_b)
+static void	restore_sorted_a(t_stack *a, t_stack *b)
 {
-	int	pos;
-
-	if (!stack_a || !stack_b || stack_b->size == 0)
-		return ;
-	pos = stack_max_pos(stack_b);
-	rotate_pos_to_top(stack_b, pos);
-	pa(stack_a, stack_b);
+	while (b->size > 0)
+	{
+		rotate_pos_to_top(b, stack_max_pos(b));
+		pa(a, b);
+	}
+	bring_index_to_top(a, 0);
 }
 
-void	chunk_sort(t_stack *stack_a, t_stack *stack_b)
+void	chunk_sort_sized(t_stack *a, t_stack *b, int chunk_size)
 {
-	int	chunk_size;
-	int	total_size;
+	int	total;
 	int	start;
 	int	end;
 
-	if (!stack_a || !stack_b)
+	if (!a || !b || a->size <= 1)
 		return ;
-	total_size = stack_a->size;
-	chunk_size = ft_sqrt(total_size) + 1;
+	if (a->size >= 2)
+	{
+		pb(a, b);
+		pb(a, b);
+	}
+	total = a->size + b->size;
 	start = 0;
 	end = chunk_size - 1;
-	while (stack_a->size > 0)
+	while (a->size > 0)
 	{
-		if (end >= total_size)
-			end = total_size - 1;
-		push_chunk_to_b(stack_a, stack_b, start, end);
+		if (end >= total)
+			end = total - 1;
+		push_chunk_cheapest(a, b, start, end);
 		start = end + 1;
 		end = start + chunk_size - 1;
 	}
-	while (stack_b->size > 0)
-		push_back_best_element(stack_a, stack_b);
+	restore_sorted_a(a, b);
+}
+
+void	chunk_sort(t_stack *a, t_stack *b)
+{
+	if (!a || a->size <= 1)
+		return ;
+	chunk_sort_sized(a, b, a->size / 5 + 2);
 }

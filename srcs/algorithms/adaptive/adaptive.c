@@ -23,6 +23,8 @@ void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
 		turk_sort(stack_a, stack_b);
 	else if (disorder < 0.5)
 		chunk_sort(stack_a, stack_b);
-	else
+	else if (stack_a->size > 200)
 		radix(stack_a, stack_b);
+	else
+		chunk_sort_sized(stack_a, stack_b, stack_a->size / 3 + 2);
 }

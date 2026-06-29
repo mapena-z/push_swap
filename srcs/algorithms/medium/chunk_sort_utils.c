@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:01:17 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 17:39:50 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/29 18:00:00 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,35 @@ int	stack_has_index_in_range(t_stack *stack, int start, int end)
 		node = node->next;
 	}
 	return (0);
+}
+
+t_move	find_cheapest_in_range(t_stack *a, t_stack *b, int start, int end)
+{
+	t_node	*current;
+	t_move	best;
+	t_move	candidate;
+	int		pos_a;
+
+	best.cost = INT_MAX;
+	best.pos_a = 0;
+	best.pos_b = 0;
+	current = a->top;
+	pos_a = 0;
+	while (current)
+	{
+		if (current->index >= start && current->index <= end)
+		{
+			candidate.pos_a = pos_a;
+			candidate.pos_b = find_insert_pos_b(b, current->index);
+			candidate.cost = compute_cost(a, b,
+					candidate.pos_a, candidate.pos_b);
+			if (candidate.cost < best.cost)
+				best = candidate;
+		}
+		current = current->next;
+		pos_a++;
+	}
+	return (best);
 }
 
 void	rotate_up(t_stack *stack)

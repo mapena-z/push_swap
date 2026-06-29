@@ -46,7 +46,12 @@ void	run_method(t_stack *stack_a, t_stack *stack_b,
 	else if (has_flag(argc, argv, "--medium"))
 		chunk_sort(stack_a, stack_b);
 	else if (has_flag(argc, argv, "--complex"))
-		radix(stack_a, stack_b);
+	{
+		if (stack_a->size > 200)
+			radix(stack_a, stack_b);
+		else
+			chunk_sort_sized(stack_a, stack_b, stack_a->size / 3 + 2);
+	}
 	else
 		adaptive_sort(stack_a, stack_b);
 }
