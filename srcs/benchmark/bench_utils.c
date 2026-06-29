@@ -6,7 +6,7 @@
 /*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 17:05:58 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 17:48:09 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/29 16:36:14 by carlinaq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ void	setup_benchmark(t_stack *s_a, int argc, char **argv)
 		return ;
 	}
 	if (has_flag(argc, argv, "--simple"))
-		set_names(bench, "simple", "O(n log n)");
+		set_names(bench, "simple", "O(n²)");
 	else if (has_flag(argc, argv, "--medium"))
-		set_names(bench, "medium", "O(n log n)");
+		set_names(bench, "medium", "O(n√n)");
 	else if (has_flag(argc, argv, "--complex"))
-		set_names(bench, "complex", "O(n * k)");
+		set_names(bench, "complex", "O(n log n)");
 	else if (bench->disorder < 0.2)
-		set_adaptive_choice(bench, "insertion_sort", "O(n)");
+		set_adaptive_choice(bench, "insertion_sort", "O(n²)");
 	else if (bench->disorder < 0.5)
-		set_adaptive_choice(bench, "chunk_sort", "O(n sqrt(n))");
+		set_adaptive_choice(bench, "chunk_sort", "O(n√n)");
 	else
 		set_adaptive_choice(bench, "radix", "O(n log n)");
 	s_a->bench = bench;
