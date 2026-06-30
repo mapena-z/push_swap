@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 12:02:37 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/29 20:40:34 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/30 02:04:38 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@ int	is_number(const char *str)
 		i++;
 	}
 	return (1);
+}
+
+int	is_all_spaces(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return (1);
+	return (0);
 }
 
 int	check_long(long value)

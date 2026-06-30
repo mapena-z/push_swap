@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/28 15:08:26 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/30 02:07:23 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_split(char *argv, t_stack *stack)
 	int		i;
 	long	value;
 
-	if (!argv || *argv == '\0' || (argv[0] == ' ' && ft_strlen(argv) == 1))
+	if (!argv || *argv == '\0' || is_all_spaces(argv))
 		return (1);
 	numbers = ft_split(argv, ' ');
 	if (!numbers)
@@ -99,7 +99,7 @@ int	init_and_parse(t_stack **s_a, t_stack **s_b, int argc, char **argv)
 		return (1);
 	start_idx = first_value_arg(argc, argv);
 	if (start_idx == argc)
-		return (1);
+		return (0);
 	*s_a = stack_new('a');
 	*s_b = stack_new('b');
 	if (!*s_a || !*s_b || parse_arguments(argc, argv, start_idx, *s_a) == 1)

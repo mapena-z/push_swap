@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 10:21:08 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/28 14:47:16 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/30 02:04:56 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		init_and_parse(t_stack **s_a, t_stack **s_b, int argc, char **argv);
 int		is_algo_flag(char *arg);
 int		is_extra_flag(char *arg);
 int		validate_flags(int argc, char **argv);
+int		is_all_spaces(const char *str);
 
 #endif

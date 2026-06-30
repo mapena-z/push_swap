@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 05:26:50 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/28 15:07:59 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/06/30 02:17:29 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	if (init_and_parse(&stack_a, &stack_b, argc, argv))
 		return (1);
+	if (!stack_a || !stack_b)
+		return (0);
 	set_fd(stack_a, stack_b);
 	run_method(stack_a, stack_b, argc, argv);
 	bench_print(stack_a->bench);

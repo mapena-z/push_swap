@@ -64,8 +64,9 @@ $(NAME): $(LIBFT) $(OBJ_MANDATORY)
 	@echo ""
 	@echo "$(GREEN)push_swap compilation completed!$(NC)"
 
-checker: $(LIBFT) $(OBJ_CHECKER)
+bonus: $(LIBFT) $(OBJ_CHECKER)
 	@$(CC) $(CFLAGS) $(OBJ_CHECKER) $(LIBFT) -o $(CHECKER_NAME)
+	@touch bonus
 	@echo "$(GREEN)checker compilation completed!$(NC)"
 
 $(LIBFT):
