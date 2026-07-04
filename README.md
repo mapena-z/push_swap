@@ -1,287 +1,142 @@
+*This project was created as part of the 42 curriculum by mapena-z, carlinaq.*
+
+---
+
 # push_swap
 
-Repositorio orientado a ordenar una pila usando dos estructuras principales, `a` y `b`, y un conjunto de operaciones basicas sobre nodos enlazados.
+<p align="center">
+  <img src="https://img.shields.io/badge/School-42-black?style=for-the-badge" alt="42 School" />
+  <img src="https://img.shields.io/badge/Language-C-blue?style=for-the-badge" alt="Language C" />
+</p>
 
-La idea de este documento no es explicar toda la logica del algoritmo, sino dejar claro como estan montadas las estructuras, como se cargan los datos y que hace cada funcion publica.
+---
 
-## Vision general
+## Description
 
-En este proyecto hay dos niveles de representacion:
+**push_swap** is a 42 project whose goal is to sort a list of integers using only two stacks (`a` and `b`) and a limited set of operations, while minimizing the total number of moves. The project tests understanding of algorithmic complexity: it's not enough to sort, you have to sort *fast* and with the right strategy depending on the input's state.
 
-- `t_node`: representa un valor individual dentro de la pila.
-- `t_stack`: representa la pila completa, con punteros al inicio y al final.
+The program implements four sorting strategies selectable at runtime, plus a benchmark mode that displays detailed performance metrics.
 
-Ademas, existe `t_push_swap`, que agrupa las dos pilas y metadatos de ejecucion para estrategias mas completas.
+---
 
-### Comparacion rapida con la referencia
+## Instructions
 
-La referencia que has pasado usa una sola estructura de nodo con mas campos de control:
+### Compilation
 
-- `prev`, `next`, `target_node`
-- `push_cost`
-- `above_median`
-- `cheapest`
+```bash
+# Compile push_swap
+make
 
-En este repositorio la estructura es mas simple:
+# Compile the checker (bonus)
+make bonus
 
-- el nodo solo guarda `value`, `index` y `next`
-- la pila guarda `top`, `bot`, `size` y `name`
-- los datos de estrategia se separan en `t_push_swap`
+# Clean object files
+make clean
 
-Eso hace que la base sea mas limpia y facil de leer, aunque parte del trabajo de coste y decision se mueve fuera del nodo.
+# Clean everything (objects + binaries)
+make fclean
 
-## Estructuras
-
-### `t_node`
-
-```c
-typedef struct s_node
-{
-	int				value;
-	int				index;
-	struct s_node	*next;
-}   t_node;
+# Recompile from scratch
+make re
 ```
 
-- `value`: numero original leido por argumentos.
-- `index`: posicion relativa tras ordenar los valores de menor a mayor.
-- `next`: siguiente nodo de la pila.
+### Usage
 
-Uso principal: almacenar cada numero ya validado.
+```bash
+# Basic usage (adaptive algorithm by default)
+./push_swap 4 67 3 87 23
 
-### `t_stack`
+# Force a specific algorithm
+./push_swap --simple  3 2 1 4 5
+./push_swap --medium  3 2 1 4 5
+./push_swap --complex 3 2 1 4 5
+./push_swap --adaptive 3 2 1 4 5
 
-```c
-typedef struct s_stack
-{
-	t_node	*top;
-	t_node	*bot;
-	int		size;
-	char	name;
-}   t_stack;
+# Benchmark mode (prints metrics to stderr)
+./push_swap --bench 3 2 1 4 5
+
+# Combine flags
+./push_swap --bench --complex 3 2 1 4 5
+
+# Verify with the checker
+./push_swap 3 2 1 | ./checker 3 2 1
+
+# Count operations
+ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+
+# Test with 500 random numbers
+shuf -i 0-9999 -n 500 > args.txt
+./push_swap $(cat args.txt) | wc -l
 ```
 
-- `top`: primer elemento de la pila.
-- `bot`: ultimo elemento de la pila.
-- `size`: numero de nodos que contiene.
-- `name`: identificador de la pila, normalmente `a` o `b`.
+### Available operations
 
-Uso principal: trabajar con una lista enlazada simple sin perder acceso rapido al inicio y al final.
+| Operation | Description |
+|-----------|-------------|
+| `sa` / `sb` / `ss` | Swap the two top elements of a / b / both |
+| `pa` / `pb` | Push the top of b→a / a→b |
+| `ra` / `rb` / `rr` | Rotate a / b / both |
+| `rra` / `rrb` / `rrr` | Reverse rotate a / b / both |
 
-### `t_push_swap`
+### Error handling
 
-```c
-typedef struct s_push_swap
-{
-	t_stack	a;
-	t_stack	b;
-	int		total_ops;
-	double	disorder;
-	char	*strat_name;
-	char	*strat_complex;
-	int		n_sa;
-	int		n_sb;
-	int		n_ss;
-	int		n_pa;
-	int		n_pb;
-	int		n_ra;
-	int		n_rb;
-	int		n_rr;
-	int		n_rra;
-	int		n_rrb;
-	int		n_rrr;
-}   t_push_swap;
+```bash
+./push_swap 0 one 2 3   # Error: non-integer argument
+./push_swap 3 2 3       # Error: duplicates
+./push_swap             # No output (no arguments)
 ```
 
-- agrupa ambas pilas
-- guarda contadores de operaciones
-- permite llevar estadisticas de una estrategia mas avanzada
+---
 
-## Como se llena la estructura
+## Implemented algorithms
 
-El flujo normal de carga es este:
+### 1. Simple — O(n²): Turk Sort (`--simple`)
 
-1. Se validan los argumentos de entrada.
-2. Se comprueba que cada token sea un numero valido.
-3. Se convierte el texto a entero largo.
-4. Se crea un nodo con el valor.
-5. Se inserta ese nodo en la pila.
+An adaptation of insertion sort for two stacks. For each element in `a`, it computes the minimum cost to move it to its correct position in `b` by combining rotations of both stacks simultaneously (`rr` / `rrr`). Once all elements are in `b` in descending order, they are pushed back to `a` with `pa`.
 
-En terminos de funciones, el camino habitual es:
+**Justification:** It's the most intuitive algorithm and sufficient for small inputs (≤ 5 elements). For large n its quadratic cost makes it inefficient, but it serves as a baseline and for the `--simple` mode.
 
-```c
-int     parse_arguments(int argc, char **argv, int i, t_stack *stack);
-int     check_split(char *argv, t_stack *stack);
-int     is_number(const char *str);
-int     check_long(long value);
-long    ft_atol(const char *nptr);
-void    push(t_stack *stack, int value);
-void    stack_add_back(t_stack *stack, t_node *node);
-```
+### 2. Medium — O(n√n): Chunk Sort (`--medium`)
 
-### Que hace cada paso
+Divides the index range into `√n` chunks of similar size. On each pass, it moves to `b` every element whose index falls within the current chunk, optimizing rotations to minimize movements. Once everything is in `b`, it's pushed back to `a` in order.
 
-- `parse_arguments(...)` recorre los argumentos y lanza el proceso de validacion/carga.
-- `check_split(...)` separa una cadena con espacios y procesa cada numero por separado.
-- `is_number(...)` valida el formato numerico.
-- `check_long(...)` evita desbordamientos de `int`.
-- `ft_atol(...)` convierte el texto a `long`.
-- `push(...)` en la capa de parsing actua como helper para ir metiendo valores en la estructura.
-- `stack_add_back(...)` enlaza el nodo al final de la pila.
+**Justification:** By reducing the problem into blocks of size √n, the number of rotations needed drops considerably compared to O(n²), making it ideal for medium-sized inputs (100–500 elements).
 
-### Nota importante sobre nombres
+### 3. Complex — O(n log n): Radix Sort (`--complex`)
 
-En el proyecto aparece el nombre `push` en dos contextos:
+An LSD (Least Significant Digit) radix sort implementation adapted to stacks. It sorts bit by bit: on each pass, elements with the current bit set to 0 are sent to `b` (`pb`), and those with the bit set to 1 are rotated within `a` (`ra`). After each pass everything is pushed back to `a`. As many passes are needed as bits in the largest index.
 
-- como helper de carga de datos
-- como operacion de movimiento entre pilas
+**Justification:** Since it operates on normalized indices (0..n-1), the number of bits required is log₂(n), resulting in exactly n·log₂(n) operations in all cases. It's the most predictable and efficient option for large inputs.
 
-Conceptualmente son cosas distintas. Si alguien revisa el codigo, conviene leerlo asi para no confundir la carga inicial con la operacion `pa/pb`.
+### 4. Adaptive (`--adaptive`, default behavior)
 
-## Operaciones de movimiento
+Selects the algorithm based on the **disorder index** computed before any move:
 
-Estas funciones son las que modifican la posicion de los nodos en las pilas.
+| Disorder | Algorithm chosen | Complexity |
+|----------|-------------------|------------|
+| < 0.2 | Turk Sort (insertion) | O(n) effective |
+| 0.2 – 0.5 | Chunk Sort | O(n√n) |
+| ≥ 0.5 | Radix Sort | O(n log n) |
 
-### Operaciones base
+The disorder index is the fraction of pairs (i, j) with i < j where `a[i] > a[j]`. It's 0 when sorted and 1 when fully inverted.
 
-```c
-void push(t_stack *src, t_stack *dst);
-void swap(t_stack *stack);
-void rotate(t_stack *stack);
-void reverse_rotate(t_stack *stack);
-```
+**Threshold justification:** With disorder < 0.2 the stack is nearly sorted, so a few swaps and insertions cover the case in linear time. Between 0.2 and 0.5 there's enough disorder for the chunks to amortize the cost well. Above 0.5 the stack is mixed enough that radix, with its uniform cost, becomes the most stable option.
 
-- `push(src, dst)`: mueve el nodo superior de `src` al inicio de `dst`.
-- `swap(stack)`: intercambia los dos primeros nodos.
-- `rotate(stack)`: sube el primer nodo al final.
-- `reverse_rotate(stack)`: baja el ultimo nodo al principio.
+## Resources
 
-### Operaciones impresas
+### Technical references
 
-```c
-void pa(t_stack *a, t_stack *b);
-void pb(t_stack *a, t_stack *b);
-void sa(t_stack *a);
-void sb(t_stack *b);
-void ss(t_stack *a, t_stack *b);
-void ra(t_stack *a);
-void rb(t_stack *b);
-void rr(t_stack *a, t_stack *b);
-void rra(t_stack *a);
-void rrb(t_stack *b);
-void rrr(t_stack *a, t_stack *b);
-```
+- Knuth, D. E. — *The Art of Computer Programming, Vol. 3: Sorting and Searching* — classic reference on sorting algorithms.
+- [Visualgo — Sorting Algorithms](https://visualgo.net/en/sorting) — interactive visualization of sorting algorithms.
+- [Wikipedia — Radix Sort](https://en.wikipedia.org/wiki/Radix_sort) — description of the LSD/MSD algorithm.
+- [Wikipedia — Insertion Sort](https://en.wikipedia.org/wiki/Insertion_sort) — basis of the implemented simple algorithm.
+- [42 Docs — Push Swap](https://harm-smits.github.io/42docs/projects/push_swap) — community reference for the project.
 
-- `pa` y `pb`: hacen un `push` entre pilas y escriben la operacion.
-- `sa`, `sb`, `ss`: aplican `swap`.
-- `ra`, `rb`, `rr`: aplican `rotate`.
-- `rra`, `rrb`, `rrr`: aplican `reverse_rotate`.
+### AI usage
 
-### Salida de movimientos
+AI (Claude) was used as support for the following tasks:
 
-```c
-void print_mov(t_stack *stack, char mov);
-```
-
-- recibe la pila y una letra base del movimiento
-- imprime el codigo de operacion con el nombre de la pila
-
-Ejemplo conceptual:
-
-- `sa`
-- `pb`
-- `rr`
-
-## Utilidades de pila
-
-### Creacion y destruccion
-
-```c
-t_node  *node_new(int value, int index);
-void    node_free(t_node *node);
-t_stack *stack_new(char name);
-void    stack_clear(t_stack *stack);
-void    stack_free(t_stack *stack);
-```
-
-- `node_new(value, index)`: crea un nodo nuevo.
-- `node_free(node)`: libera un nodo.
-- `stack_new(name)`: crea una pila vacia con nombre.
-- `stack_clear(stack)`: libera todos los nodos pero mantiene la pila.
-- `stack_free(stack)`: libera nodos y estructura de pila.
-
-### Insercion y busqueda
-
-```c
-void    stack_add_front(t_stack *stack, t_node *node);
-void    stack_add_back(t_stack *stack, t_node *node);
-t_node  *stack_get_at(t_stack *stack, int index);
-int     stack_min_pos(t_stack *stack);
-int     stack_max_pos(t_stack *stack);
-int     stack_find_index(t_stack *stack, int index);
-```
-
-- `stack_add_front(...)`: mete un nodo al principio.
-- `stack_add_back(...)`: mete un nodo al final.
-- `stack_get_at(...)`: recupera el nodo en una posicion concreta.
-- `stack_min_pos(...)`: devuelve la posicion del indice mas pequeno.
-- `stack_max_pos(...)`: devuelve la posicion del indice mas grande.
-- `stack_find_index(...)`: busca la posicion de un indice concreto.
-
-## Validacion de entrada
-
-```c
-int is_number(const char *str);
-int check_long(long value);
-long ft_atol(const char *nptr);
-int check_flags(char *arg);
-int check_split(char *argv, t_stack *stack);
-int parse_arguments(int argc, char **argv, int i, t_stack *stack);
-```
-
-- `is_number(...)`: comprueba si una cadena tiene formato numerico valido.
-- `check_long(...)`: valida que el numero entre en rango de `int`.
-- `ft_atol(...)`: convierte una cadena a `long`.
-- `check_flags(...)`: detecta flags de ejecucion.
-- `check_split(...)`: divide una cadena con espacios y procesa cada token.
-- `parse_arguments(...)`: coordina toda la lectura de argumentos.
-
-## Limpieza
-
-```c
-void free_stacks(t_stack *stack);
-void free_words(char **words);
-```
-
-- `free_stacks(...)`: libera una lista de pilas.
-- `free_words(...)`: libera un array de strings devuelto por `ft_split`.
-
-## Algoritmos
-
-```c
-void alg_two(t_stack *stack);
-void alg_three(t_stack *a);
-void alg_four(t_stack *a, t_stack *b);
-void alg_five(t_stack *a, t_stack *b);
-void insertion_basic(t_stack *stack_a, t_stack *stack_b);
-void insertion_sort(t_stack *stack_a, t_stack *stack_b);
-```
-
-Todas estas funciones reciben punteros a pila y no devuelven nada.
-
-La idea general es:
-
-- `alg_two`, `alg_three`, `alg_four`, `alg_five`: soluciones cortas para pocos elementos.
-- `insertion_basic` e `insertion_sort`: estrategias de ordenacion mas generales.
-
-## Debug
-
-```c
-void stack_print(t_stack *stack);
-void stack_print_both(t_stack *a, t_stack *b);
-```
-
-- imprimen el contenido y el tamano de cada pila
-- sirven para comprobar estados intermedios durante pruebas
+- **Makefile debugging**: diagnosing the relink issue caused by targets in `.PHONY` and timestamp behavior on WSL/NTFS.
 
 
+In all cases the code was reviewed, understood, and adapted by the authors before being integrated into the project.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlinaq <carlinaq@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 18:23:59 by carlinaq          #+#    #+#             */
-/*   Updated: 2026/06/24 18:24:12 by carlinaq         ###   ########.fr       */
+/*   Updated: 2026/06/30 09:18:26 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "push_swap.h"
 
-/* Operations with output */
 void	pa(t_stack *out, t_stack *in);
 void	pb(t_stack *out, t_stack *in);
 void	sa(t_stack *a);
