@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/25 10:23:34 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/30 20:10:05 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/07/04 16:29:52 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	is_algo_flag(char *arg)
 int	is_extra_flag(char *arg)
 {
 	if (ft_strncmp(arg, "--bench", 8) == 0)
-		return (1);
-	if (ft_strncmp(arg, "--b", 4) == 0)
 		return (1);
 	return (0);
 }

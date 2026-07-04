@@ -6,7 +6,7 @@
 /*   By: mapena-z <mapena-z@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 11:43:05 by mapena-z          #+#    #+#             */
-/*   Updated: 2026/06/30 20:09:47 by mapena-z         ###   ########.fr       */
+/*   Updated: 2026/07/04 16:29:43 by mapena-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_flags(char *arg)
 		return (0);
 	if (ft_strncmp(arg, "--simple", 9) == 0 || ft_strncmp(arg, "--medium",
 			9) == 0 || ft_strncmp(arg, "--complex", 10) == 0 || ft_strncmp(arg,
-			"--adaptive", 11) == 0 || ft_strncmp(arg, "--bench", 8) == 0 || ft_strncmp(arg, "--b", 4) == 0)
+			"--adaptive", 11) == 0 || ft_strncmp(arg, "--bench", 8) == 0)
 	{
 		return (1);
 	}
